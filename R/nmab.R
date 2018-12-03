@@ -1,4 +1,4 @@
-#' Calculates Gittins indices for a range of n as given by argument "n_range".
+#' Calculate the Gittins index for multiple arms (normal rewards)
 #'
 #' Assumes mu=0.
 #'
@@ -30,7 +30,7 @@ nmab_gi_multiple <- function(n_range, gamma, tau, tol, N, xi, delta){
   gi_vec
 }
 
-#' Calculates the Gittins index for the NMAB for a single arm with supplied parameters.
+#' Calculate the Gittins index for a single arm (normal rewards)
 #'
 #' The initial interval for calibration are as follows:
 #' For lower bound, use lb if supplied else use KGI if kgi=T or Sigma/n otherwise.
@@ -72,7 +72,7 @@ nmab_gi <- function(Sigma, n, gamma, tau, tol, N, xi, delta, lb=NA, ub=NA, kgi=T
   mean(interval)
 }
 
-#' Calculates the GI+ index for the NMAB for a single arm with supplied parameters.
+#' Calculate the GI+ index for a single arm (normal rewards)
 #'
 #' The index is an upper bound for GI.
 #'
@@ -95,7 +95,7 @@ nmab_giplus <- function(Sigma, n, gamma, tol, lb, ub, upper=F){
   mean(interval)
 }
 
-#' Calculates the KGI index for the NMAB for a single arm with supplied parameters.
+#' Calculate the knowledge gradient index for a single arm (normal rewards)
 #'
 #' The index is an lower bound for GI.
 #'
@@ -119,7 +119,7 @@ nmab_kgi <- function(Sigma, n, gamma, tau, tol, ub, lower=F){
   mean(interval)
 }
 
-#' Value approximation for the one-armed bandit with Normal rewards using GI+ as policy.
+#' Value of one-armed bandit using GI+ (normal rewards)
 #'
 #' @param lambda reward from the known arm
 #' @param mu mean of reward belief for the unknown arm
@@ -138,11 +138,7 @@ nmab_giplus_value <- function(lambda, mu, n, gamma){
   mu - lambda * prob_retire - lambda * (1 - prob_retire) / (1 - gamma) + gamma * int / (1 - gamma)
 }
 
-#############
-# Returns the value of the constrained one-armed bandit problem solved using the knowledge gradient policy.
-# Calculation is as given in Ryzhov, Powell & Frazier (2012).
-#############
-#' Value approximation for the one-armed bandit with Normal rewards using KGI as policy.
+#' Value of one-armed bandit using KGI (normal rewards)
 #'
 #' Calculation is as given in Ryzhov, Powell & Frazier (2012).
 #'
@@ -163,9 +159,11 @@ nmab_kgi_value <- function(lambda, mu, n,  gamma, tau){
   v * gamma / (1 - gamma) + mu - lambda
 }
 
+
+#' Reward of the risky arm in a one-armed bandit process
+#'
 #' Helper function only used in nmab_gi_value.
 #'
-#' Returns the value of the risky arm with the supplied parameters.
 nmab_risky_reward <- function(mu, y_lo_scaled, y_hi_scaled, tn_scaled, tau, s, value_vec, discount){
   yhi <- y_hi_scaled - mu * tn_scaled
   ylo <- y_lo_scaled - mu * tn_scaled

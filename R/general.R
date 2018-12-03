@@ -1,3 +1,5 @@
+#' Calibrate a unknown arm against a known arm
+#'
 #' Performs iterative reduction of an interval using calibration with value function FUN.
 #'
 #' @param FUN a value function

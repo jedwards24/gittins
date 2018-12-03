@@ -1,4 +1,4 @@
-#' Calculates Gittins indices for the BMAB with a range of arm states.
+#' Calculate Gittins indices for multiple arms (Bernoulli rewards)
 #'
 #' The states are a triangular matrix with:
 #' Sigma = Sigma_start, Sigma_start + 1, ..., Sigma_start + num_actions - 1,
@@ -25,7 +25,7 @@ bmab_gi_multiple <- function(Sigma_start=1, n_start=2, gamma, N, num_actions, to
   GI
 }
 
-#' Calculates Gittins indices for the BMAB with a range of arm states.
+#' Calculate Gittins indices for multiple arms (Bernoulli rewards)
 #'
 #' This version uses alpha, beta parameterisation.
 #' The states are a triangular matrix with:
@@ -69,7 +69,7 @@ bmab_gi_multiple_ab <- function(alpha_start=1, beta_start=1, gamma, N, num_actio
   GI
 }
 
-#' Calculates the Gittins index for the BMAB for a single arm with supplied parameters.
+#' Calculate Gittins indices for a single arm (Bernoulli rewards)
 #'
 #' The initial interval for calibration are as follows:
 #' For lower bound, use lb if supplied else use KGI if kgi=T or Sigma/n otherwise.
@@ -107,7 +107,7 @@ bmab_gi <- function(Sigma, n, gamma, tol, N, lb=NA, ub=NA, kgi=F, giplus=F){
   mean(calibrate_arm(bmab_gi_value, lb, ub, tol, Sigma, n, gamma, N))
 }
 
-#' Calculates the Gittins index for the BMAB for a single arm with supplied parameters.
+#' Calculate Gittins indices for a single arm (Bernoulli rewards)
 #'
 #' This version uses alpha, beta parameterisation.
 #' The initial interval for calibration are as follows:
@@ -132,7 +132,7 @@ bmab_gi_ab <- function(alpha, beta, gamma, tol, N, lb=NA, ub=NA, kgi=F, giplus=F
   bmab_gi(Sigma = alpha, n = alpha + beta, gamma, tol, N, lb, ub, kgi, giplus)
 }
 
-#' Calculates the GI+ index for the BMAB for a single arm with supplied parameters.
+#' Calculate the GI+ index for a single arm (Bernoulli rewards)
 #'
 #' Upper bound for GI.
 #'
@@ -154,7 +154,7 @@ bmab_giplus <- function(Sigma, n, gamma, tol, upper=F){
   mean(interval)
 }
 
-#' Calculates the KGI index for the BMAB for a single arm with supplied parameters.
+#' Calculate the knowledge gradient index for a single arm (Bernoulli rewards)
 #'
 #' Exact closed form calculation.
 #'
@@ -172,7 +172,7 @@ bmab_kgi <- function(Sigma, n, gamma){
   (mu + H * mu * (Sigma + 1) / (n + 1)) / (1 + H * mu)
 }
 
-#' Value approximation for the one-armed bandit with Normal rewards using GI+ as policy.
+#' Value of one-armed bandit using GI+ (Bernoulli rewards)
 #'
 #' @param lambda reward from the known arm
 #' @param Sigma value of Sigma for the unknown arm
@@ -193,10 +193,7 @@ bmab_giplus_value <- function(lambda, Sigma, n, gamma){
   mu + mu * value_success + (1 - mu) * value_fail - lambda / (1 - gamma)
 }
 
-#############
-# Returns the value of the one-armed bandit problem with supplied lambda and arm parameters.
-#############
-#' Value approximation for the one-armed bandit with Normal rewards.
+#' Value of one-armed bandit using KGI (Bernoulli rewards)
 #'
 #' @param lambda reward from the known arm
 #' @param Sigma value of Sigma for the unknown arm
