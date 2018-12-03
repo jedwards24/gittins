@@ -2,7 +2,7 @@
 % Please edit documentation in R/bmab.R
 \name{bmab_gi_multiple}
 \alias{bmab_gi_multiple}
-\title{Calculates Gittins indices for the BMAB with a range of arm states.}
+\title{Calculate Gittins indices for multiple arms (Bernoulli rewards)}
 \usage{
 bmab_gi_multiple(Sigma_start = 1, n_start = 2, gamma, N, num_actions,
   tol)

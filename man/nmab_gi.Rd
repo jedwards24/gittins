@@ -2,7 +2,7 @@
 % Please edit documentation in R/nmab.R
 \name{nmab_gi}
 \alias{nmab_gi}
-\title{Calculates the Gittins index for the NMAB for a single arm with supplied parameters.}
+\title{Calculate the Gittins index for a single arm (normal rewards)}
 \usage{
 nmab_gi(Sigma, n, gamma, tau, tol, N, xi, delta, lb = NA, ub = NA,
   kgi = T, giplus = T)

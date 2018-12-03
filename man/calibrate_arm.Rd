@@ -2,7 +2,7 @@
 % Please edit documentation in R/general.R
 \name{calibrate_arm}
 \alias{calibrate_arm}
-\title{Performs iterative reduction of an interval using calibration with value function FUN.}
+\title{Calibrate a unknown arm against a known arm}
 \usage{
 calibrate_arm(FUN, lb, ub, tol, ...)
 }

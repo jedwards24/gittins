@@ -2,7 +2,7 @@
 % Please edit documentation in R/nmab.R
 \name{nmab_giplus_value}
 \alias{nmab_giplus_value}
-\title{Value approximation for the one-armed bandit with Normal rewards using GI+ as policy.}
+\title{Value of one-armed bandit using GI+ (normal rewards)}
 \usage{
 nmab_giplus_value(lambda, mu, n, gamma)
 }
@@ -19,5 +19,5 @@ nmab_giplus_value(lambda, mu, n, gamma)
 Difference in value between safe and unknown arms
 }
 \description{
-Value approximation for the one-armed bandit with Normal rewards using GI+ as policy.
+Value of one-armed bandit using GI+ (normal rewards)
 }

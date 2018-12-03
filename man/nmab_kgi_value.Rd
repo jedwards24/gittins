@@ -2,7 +2,7 @@
 % Please edit documentation in R/nmab.R
 \name{nmab_kgi_value}
 \alias{nmab_kgi_value}
-\title{Value approximation for the one-armed bandit with Normal rewards using KGI as policy.}
+\title{Value of one-armed bandit using KGI (normal rewards)}
 \usage{
 nmab_kgi_value(lambda, mu, n, gamma, tau)
 }

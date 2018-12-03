@@ -2,7 +2,7 @@
 % Please edit documentation in R/nmab.R
 \name{nmab_giplus}
 \alias{nmab_giplus}
-\title{Calculates the GI+ index for the NMAB for a single arm with supplied parameters.}
+\title{Calculate the GI+ index for a single arm (normal rewards)}
 \usage{
 nmab_giplus(Sigma, n, gamma, tol, lb, ub, upper = F)
 }

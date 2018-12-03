@@ -42,6 +42,9 @@ bmab_gi_multiple <- function(Sigma_start=1, n_start=2, gamma, N, num_actions, to
 #'
 #' @return A triangular matrix of GI values
 #'
+#' @examples
+#' bmab_gi_multiple_ab(1, 1, gamma = 0.9, N = 80, num_actions = 20, tol = 5e-5)
+#'
 #' @export
 #'
 bmab_gi_multiple_ab <- function(alpha_start=1, beta_start=1, gamma, N, num_actions, tol){
@@ -85,7 +88,7 @@ bmab_gi_multiple_ab <- function(alpha_start=1, beta_start=1, gamma, N, num_actio
 #' @param kgi=F optional boolean indicates whether to use KGI for lower bound (only if lb=NA)
 #' @param giplus=F optional boolean indicates whether to use GI+ for upper bound (only if ub=NA)
 #'
-#' @return A vector of GI values
+#' @return A single Gittins index
 #'
 #' @export
 #'
@@ -124,7 +127,8 @@ bmab_gi <- function(Sigma, n, gamma, tol, N, lb=NA, ub=NA, kgi=F, giplus=F){
 #' @param kgi=F optional boolean indicates whether to use KGI for lower bound (only if lb=NA)
 #' @param giplus=F optional boolean indicates whether to use GI+ for upper bound (only if ub=NA)
 #'
-#' @return A vector of GI values
+#' @return A single Gittins index
+#'
 #'
 #' @export
 #'

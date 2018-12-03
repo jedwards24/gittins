@@ -2,7 +2,7 @@
 % Please edit documentation in R/nmab.R
 \name{nmab_kgi}
 \alias{nmab_kgi}
-\title{Calculates the KGI index for the NMAB for a single arm with supplied parameters.}
+\title{Calculate the knowledge gradient index for a single arm (normal rewards)}
 \usage{
 nmab_kgi(Sigma, n, gamma, tau, tol, ub, lower = F)
 }

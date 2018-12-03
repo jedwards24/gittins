@@ -2,7 +2,7 @@
 % Please edit documentation in R/bmab.R
 \name{bmab_gi_value}
 \alias{bmab_gi_value}
-\title{Value approximation for the one-armed bandit with Normal rewards.}
+\title{Value of one-armed bandit using KGI (Bernoulli rewards)}
 \usage{
 bmab_gi_value(lambda, Sigma, n, gamma, N)
 }
@@ -21,5 +21,5 @@ bmab_gi_value(lambda, Sigma, n, gamma, N)
 Difference in value between safe and unknown arms
 }
 \description{
-Value approximation for the one-armed bandit with Normal rewards.
+Value of one-armed bandit using KGI (Bernoulli rewards)
 }

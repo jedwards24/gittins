@@ -2,7 +2,7 @@
 % Please edit documentation in R/bmab.R
 \name{bmab_gi}
 \alias{bmab_gi}
-\title{Calculates the Gittins index for the BMAB for a single arm with supplied parameters.}
+\title{Calculate Gittins indices for a single arm (Bernoulli rewards)}
 \usage{
 bmab_gi(Sigma, n, gamma, tol, N, lb = NA, ub = NA, kgi = F,
   giplus = F)
@@ -27,7 +27,7 @@ bmab_gi(Sigma, n, gamma, tol, N, lb = NA, ub = NA, kgi = F,
 \item{giplus=F}{optional boolean indicates whether to use GI+ for upper bound (only if ub=NA)}
 }
 \value{
-A vector of GI values
+A single Gittins index
 }
 \description{
 The initial interval for calibration are as follows:

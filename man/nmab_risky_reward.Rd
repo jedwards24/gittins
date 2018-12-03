@@ -2,11 +2,11 @@
 % Please edit documentation in R/nmab.R
 \name{nmab_risky_reward}
 \alias{nmab_risky_reward}
-\title{Helper function only used in nmab_gi_value.}
+\title{Reward of the risky arm in a one-armed bandit process}
 \usage{
 nmab_risky_reward(mu, y_lo_scaled, y_hi_scaled, tn_scaled, tau, s,
   value_vec, discount)
 }
 \description{
-Returns the value of the risky arm with the supplied parameters.
+Helper function only used in nmab_gi_value.
 }

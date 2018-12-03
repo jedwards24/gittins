@@ -2,7 +2,7 @@
 % Please edit documentation in R/bmab.R
 \name{bmab_kgi}
 \alias{bmab_kgi}
-\title{Calculates the KGI index for the BMAB for a single arm with supplied parameters.}
+\title{Calculate the knowledge gradient index for a single arm (Bernoulli rewards)}
 \usage{
 bmab_kgi(Sigma, n, gamma)
 }

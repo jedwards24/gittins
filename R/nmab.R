@@ -12,6 +12,9 @@
 #'
 #' @return A vector of GI values
 #'
+#' @examples
+#' nmab_gi_multiple(1 : 20, gamma = 0.9, tau = 1, tol = 5e-5, N = 30, xi = 3, delta = 0.02)
+#'
 #' @export
 #'
 nmab_gi_multiple <- function(n_range, gamma, tau, tol, N, xi, delta){

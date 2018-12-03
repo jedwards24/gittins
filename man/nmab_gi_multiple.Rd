@@ -2,7 +2,7 @@
 % Please edit documentation in R/nmab.R
 \name{nmab_gi_multiple}
 \alias{nmab_gi_multiple}
-\title{Calculates Gittins indices for a range of n as given by argument "n_range".}
+\title{Calculate the Gittins index for multiple arms (normal rewards)}
 \usage{
 nmab_gi_multiple(n_range, gamma, tau, tol, N, xi, delta)
 }
@@ -26,4 +26,8 @@ A vector of GI values
 }
 \description{
 Assumes mu=0.
+}
+\examples{
+nmab_gi_multiple(1 : 20, gamma = 0.9, tau = 1, tol = 5e-5, N = 30, xi = 3, delta = 0.02)
+
 }

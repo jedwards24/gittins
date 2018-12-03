@@ -2,7 +2,7 @@
 % Please edit documentation in R/bmab.R
 \name{bmab_gi_multiple_ab}
 \alias{bmab_gi_multiple_ab}
-\title{Calculates Gittins indices for the BMAB with a range of arm states.}
+\title{Calculate Gittins indices for multiple arms (Bernoulli rewards)}
 \usage{
 bmab_gi_multiple_ab(alpha_start = 1, beta_start = 1, gamma, N,
   num_actions, tol)
@@ -29,4 +29,8 @@ The states are a triangular matrix with:
 alpha=alpha_start, alpha_start + 1, ..., alpha_start + num_actions - 1,
 beta=beta_start, beta_start + 1, ..., beta_start + num_actions - 1,
 and alpha + beta <= num_actions + alpha_start + beta_start - 1.
+}
+\examples{
+bmab_gi_multiple_ab(1, 1, gamma = 0.9, N = 80, num_actions = 20, tol = 5e-5)
+
 }

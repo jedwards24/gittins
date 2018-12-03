@@ -2,7 +2,7 @@
 % Please edit documentation in R/bmab.R
 \name{bmab_giplus}
 \alias{bmab_giplus}
-\title{Calculates the GI+ index for the BMAB for a single arm with supplied parameters.}
+\title{Calculate the GI+ index for a single arm (Bernoulli rewards)}
 \usage{
 bmab_giplus(Sigma, n, gamma, tol, upper = F)
 }
