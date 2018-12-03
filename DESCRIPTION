@@ -1,0 +1,11 @@
+Package: gittins
+Type: Package
+Title: Calculate Gittins Indices
+Version: 0.1.0
+Author: James Edwards <j.edwards4@lancaster.ac.uk> 
+Maintainer: James Edwards <j.edwards4@lancaster.ac.uk>
+Description: Calculates Gittins indices for the multi-armed bandit problem.
+License: MIT + file LICENCE
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.1.0
