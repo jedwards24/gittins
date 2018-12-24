@@ -1,6 +1,6 @@
 #' Function arguments
 #'
-#' @keywords integral
+#' @keywords internal
 #'
 #' @name nmab_args
 #'
@@ -17,7 +17,7 @@ NULL
 
 #' Function arguments for value functions
 #'
-#' @keywords integral
+#' @keywords internal
 #'
 #' @name nmab_v_args
 #'

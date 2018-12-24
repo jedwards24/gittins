@@ -22,9 +22,9 @@ bmab_gi(Sigma, n, gamma, tol, N, lb = NA, ub = NA, kgi = F,
 
 \item{ub=NA}{optional upper bound for GI}
 
-\item{kgi=F}{optional boolean indicates whether to use KGI for lower bound (only if lb=NA)}
+\item{kgi=F}{optional boolean indicates whether to use KGI for lower bound (only if \code{lb=NA})}
 
-\item{giplus=F}{optional boolean indicates whether to use GI+ for upper bound (only if ub=NA)}
+\item{giplus=F}{optional boolean indicates whether to use GI+ for upper bound (only if \code{ub=NA})}
 }
 \value{
 A single Gittins index

@@ -23,4 +23,4 @@
 \description{
 Function arguments
 }
-\keyword{integral}
+\keyword{internal}

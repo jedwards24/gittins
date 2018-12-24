@@ -28,9 +28,9 @@ nmab_gi(Sigma, n, gamma, tau, tol, N, xi, delta, lb = NA, ub = NA,
 
 \item{ub=NA}{optional upper bound for GI}
 
-\item{kgi=T}{optional boolean indicates whether to use KGI for lower bound (only if lb=NA)}
+\item{kgi=T}{optional boolean indicates whether to use KGI for lower bound (only if \code{lb=NA})}
 
-\item{giplus=T}{optional boolean indicates whether to use GI+ for upper bound (only if ub=NA)}
+\item{giplus=T}{optional boolean indicates whether to use GI+ for upper bound (only if \code{ub=NA})}
 }
 \value{
 A vector of GI values

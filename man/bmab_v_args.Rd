@@ -13,4 +13,4 @@
 \description{
 Function arguments for value functions
 }
-\keyword{integral}
+\keyword{internal}

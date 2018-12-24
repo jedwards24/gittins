@@ -1,6 +1,6 @@
 #' Function arguments
 #'
-#' @keywords integral
+#' @keywords internal
 #'
 #' @name bmab_args
 #'
@@ -15,7 +15,7 @@ NULL
 
 #' Function arguments for value functions
 #'
-#' @keywords integral
+#' @keywords internal
 #'
 #' @name bmab_v_args
 #'

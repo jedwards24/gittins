@@ -1,4 +1,4 @@
-#' Calibrate a unknown arm against a known arm
+#' Calibrate an unknown arm against a known arm
 #'
 #' Performs iterative reduction of an interval using calibration with value function FUN.
 #'
