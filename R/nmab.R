@@ -1,14 +1,38 @@
-#' Calculate the Gittins index for multiple arms (normal rewards)
+#' Function arguments
 #'
-#' Assumes mu=0.
+#' @keywords integral
 #'
-#' @param n_range numeric vector giving values of n
+#' @name nmab_args
+#'
+#' @param Sigma value of Sigma for the arm
+#' @param n value of n for the arm
 #' @param gamma discount factor
 #' @param tau observation precision
 #' @param tol absolute accuracy required
 #' @param N time horizon used
 #' @param xi value of xi (entent of dynamic programmme state space)
 #' @param delta value of delta (fineness of discretisation in the dynamic programmme)
+#'
+NULL
+
+#' Function arguments for value functions
+#'
+#' @keywords integral
+#'
+#' @name nmab_v_args
+#'
+#' @param lambda reward from the known arm
+#' @param mu mean of reward belief for the unknown arm
+#' @param n value of n for the unknown arm
+#'
+NULL
+
+#' Calculate the Gittins index for multiple arms (normal rewards)
+#'
+#' Assumes mu=0.
+#'
+#' @param n_range numeric vector giving values of n
+#' @inheritParams nmab_args
 #'
 #' @return A vector of GI values
 #'
@@ -36,21 +60,14 @@ nmab_gi_multiple <- function(n_range, gamma, tau, tol, N, xi, delta){
 #' Calculate the Gittins index for a single arm (normal rewards)
 #'
 #' The initial interval for calibration are as follows:
-#' For lower bound, use lb if supplied else use KGI if kgi=T or Sigma/n otherwise.
-#' For upper bound, use ub if supplied else use GI+ if giplus=T or gamma / ((1 - gamma) * sqrt(n)) otherwise.
+#' For lower bound, use lb if supplied else use KGI if `kgi=T` or `Sigma/n` otherwise.
+#' For upper bound, use ub if supplied else use GI+ if `giplus=T` or `gamma/((1 - gamma) * sqrt(n))` otherwise.
 #'
-#' @param Sigma value of Sigma for the arm
-#' @param n value of n for the arm
-#' @param gamma discount factor
-#' @param tau observation precision
-#' @param tol absolute accuracy required
-#' @param N time horizon used
-#' @param xi value of xi (entent of dynamic programmme state space)
-#' @param delta value of delta (fineness of discretisation in the dynamic programmme)
+#' @inheritParams nmab_args
 #' @param lb=NA optional lower bound for GI
 #' @param ub=NA optional upper bound for GI
-#' @param kgi=T optional boolean indicates whether to use KGI for lower bound (only if lb=NA)
-#' @param giplus=T optional boolean indicates whether to use GI+ for upper bound (only if ub=NA)
+#' @param kgi=T optional boolean indicates whether to use KGI for lower bound (only if `lb=NA`)
+#' @param giplus=T optional boolean indicates whether to use GI+ for upper bound (only if `ub=NA`)
 #'
 #' @return A vector of GI values
 #'
@@ -79,11 +96,8 @@ nmab_gi <- function(Sigma, n, gamma, tau, tol, N, xi, delta, lb=NA, ub=NA, kgi=T
 #'
 #' The index is an upper bound for GI.
 #'
-#' @param Sigma value of Sigma for the arm
-#' @param n value of n for the arm
-#' @param gamma discount factor
-#' @param tol absolute accuracy required
 #' @param upper=F if TRUE, the upper end of the interval is returned, otherwise the midpoint
+#' @inheritParams nmab_args
 #'
 #' @return A vector of GI values
 #'
@@ -102,11 +116,7 @@ nmab_giplus <- function(Sigma, n, gamma, tol, lb, ub, upper=F){
 #'
 #' The index is an lower bound for GI.
 #'
-#' @param Sigma value of Sigma for the arm
-#' @param n value of n for the arm
-#' @param gamma discount factor
-#' @param tau observation precision
-#' @param tol absolute accuracy required
+#' @inheritParams nmab_args
 #' @param lower=F if TRUE, the lower end of the interval is returned, otherwise the midpoint
 #'
 #' @return A vector of GI values
@@ -124,10 +134,8 @@ nmab_kgi <- function(Sigma, n, gamma, tau, tol, ub, lower=F){
 
 #' Value of one-armed bandit using GI+ (normal rewards)
 #'
-#' @param lambda reward from the known arm
-#' @param mu mean of reward belief for the unknown arm
-#' @param n value of n for the unknown arm
-#' @param gamma discount factor
+#' @inheritParams nmab_v_args
+#' @inheritParams nmab_args
 #'
 #' @return Difference in value between safe and unknown arms
 #'
@@ -145,11 +153,8 @@ nmab_giplus_value <- function(lambda, mu, n, gamma){
 #'
 #' Calculation is as given in Ryzhov, Powell & Frazier (2012).
 #'
-#' @param lambda reward from the known arm
-#' @param mu mean of reward belief for the unknown arm
-#' @param n value of n for the unknown arm
-#' @param gamma discount factor
-#' @param tau observation precision
+#' @inheritParams nmab_v_args
+#' @inheritParams nmab_args
 #'
 #' @return Difference in value between safe and unknown arms
 #'
@@ -183,15 +188,10 @@ nmab_risky_reward <- function(mu, y_lo_scaled, y_hi_scaled, tn_scaled, tau, s, v
 
 #' Value calculation for the one-armed bandit with Normal rewards.
 #'
-#' Assumes Sigma=mu=0.
+#' Assumes `Sigma=mu=0`.
 #'
-#' @param lambda reward from the known arm
-#' @param n value of n for the unknown arm
-#' @param gamma discount factor
-#' @param tau observation precision
-#' @param N time horizon used
-#' @param xi value of xi (entent of dynamic programmme state space)
-#' @param delta value of delta (fineness of discretisation in the dynamic programmme)
+#' @inheritParams nmab_v_args
+#' @inheritParams nmab_args
 #'
 #' @return Difference in value between safe and unknown arms
 #'

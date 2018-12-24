@@ -12,11 +12,11 @@ bmab_gi(Sigma, n, gamma, tol, N, lb = NA, ub = NA, kgi = F,
 
 \item{n}{value of n for the arm}
 
-\item{gamma}{discount factor}
+\item{gamma}{numeric in (0, 1]; discount factor}
 
 \item{tol}{absolute accuracy required}
 
-\item{N}{time horizon used}
+\item{N}{integer>0; time horizon used}
 
 \item{lb=NA}{optional lower bound for GI}
 
@@ -30,7 +30,12 @@ bmab_gi(Sigma, n, gamma, tol, N, lb = NA, ub = NA, kgi = F,
 A single Gittins index
 }
 \description{
+There are two versions which differ only in their parameterisation and in the layout of the output.
+\code{bmab_gi()} uses \code{Sigma} and \code{n} parameters, while \code{bmab_gi_ab()} uses \code{alpha = Sigma}
+and  \code{beta = n - Sigma}.
+}
+\details{
 The initial interval for calibration are as follows:
-For lower bound, use lb if supplied else use KGI if kgi=T or Sigma/n otherwise.
-For upper bound, use ub if supplied else use GI+ if giplus=T or 1 otherwise.
+For lower bound, use lb if supplied else use KGI if \code{kgi=T} or \code{Sigma/n} otherwise.
+For upper bound, use ub if supplied else use GI+ if \code{giplus=T} or \code{1} otherwise.
 }

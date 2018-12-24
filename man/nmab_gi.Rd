@@ -37,6 +37,6 @@ A vector of GI values
 }
 \description{
 The initial interval for calibration are as follows:
-For lower bound, use lb if supplied else use KGI if kgi=T or Sigma/n otherwise.
-For upper bound, use ub if supplied else use GI+ if giplus=T or gamma / ((1 - gamma) * sqrt(n)) otherwise.
+For lower bound, use lb if supplied else use KGI if \code{kgi=T} or \code{Sigma/n} otherwise.
+For upper bound, use ub if supplied else use GI+ if \code{giplus=T} or \code{gamma/((1 - gamma) * sqrt(n))} otherwise.
 }

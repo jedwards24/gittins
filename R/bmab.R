@@ -1,16 +1,45 @@
+#' Function arguments
+#'
+#' @keywords integral
+#'
+#' @name bmab_args
+#'
+#' @param Sigma value of Sigma for the arm
+#' @param n value of n for the arm
+#' @param gamma numeric in (0, 1]; discount factor
+#' @param tol absolute accuracy required
+#' @param N integer>0; time horizon used
+
+#'
+NULL
+
+#' Function arguments for value functions
+#'
+#' @keywords integral
+#'
+#' @name bmab_v_args
+#'
+#' @param lambda reward from the known arm
+#' @param Sigma mean of reward belief for the unknown arm
+#' @param n value of n for the unknown arm
+#'
+NULL
+
 #' Calculate Gittins indices for multiple arms (Bernoulli rewards)
 #'
-#' The states are a triangular matrix with:
-#' Sigma = Sigma_start, Sigma_start + 1, ..., Sigma_start + num_actions - 1,
-#' n = n_start, n_start + 1, ..., n_start + num_actions - 1,
-#' and Sigma <= Sigma_start + n - n_start.
+#' There are two versions which differ only in their parameterisation and in the layout of the output.
+#' `bmab_gi_multiple()` uses `Sigma` and `n` parameters,
+#' while `bmab_gi_multiple_ab()` uses `alpha = Sigma` and  `beta = n - Sigma`.
 #'
+#' The states are a triangular matrix with:
+#' * `Sigma = Sigma_start : Sigma_start + num_actions - 1`,
+#' * `n = n_start : n_start + num_actions - 1`,
+#' * `Sigma <= Sigma_start + n - n_start`.
+#'
+#' @inheritParams bmab_args
 #' @param Sigma_start=1 lowest value of Sigma for the arms
 #' @param n_start=2 lowest value of n for the arms
-#' @param gamma numeric in (0, 1]; discount factor
-#' @param N integer>0; time horizon used
 #' @param num_actions determinines the number of states GI are calculated for
-#' @param tol absolute accuracy required
 #'
 #' @return A triangular matrix of GI values
 #'
@@ -25,24 +54,20 @@ bmab_gi_multiple <- function(Sigma_start=1, n_start=2, gamma, N, num_actions, to
   GI
 }
 
-#' Calculate Gittins indices for multiple arms (Bernoulli rewards)
-#'
-#' This version uses alpha, beta parameterisation.
-#' The states are a triangular matrix with:
-#' alpha=alpha_start, alpha_start + 1, ..., alpha_start + num_actions - 1,
-#' beta=beta_start, beta_start + 1, ..., beta_start + num_actions - 1,
-#' and alpha + beta <= num_actions + alpha_start + beta_start - 1.
-#'
+# Calculate Gittins indices for multiple arms (Bernoulli rewards)
+# This version uses alpha, beta parameterisation.
+# The states are a triangular matrix with:
+# alpha=alpha_start, alpha_start + 1, ..., alpha_start + num_actions - 1,
+# beta=beta_start, beta_start + 1, ..., beta_start + num_actions - 1,
+# and alpha + beta <= num_actions + alpha_start + beta_start - 1.
+
 #' @param alpha_start=1 lowest value of alpha for the arms
 #' @param beta_start=1 lowest value of beta for the arms
-#' @param gamma discount factor
-#' @param N time horizon used
-#' @param num_actions determinines the number of states GI are calculated for
-#' @param tol absolute accuracy required
 #'
-#' @return A triangular matrix of GI values
+#' @rdname bmab_gi_multiple
 #'
 #' @examples
+#' bmab_gi_multiple(1, 2, gamma = 0.9, N = 80, num_actions = 20, tol = 5e-5)
 #' bmab_gi_multiple_ab(1, 1, gamma = 0.9, N = 80, num_actions = 20, tol = 5e-5)
 #'
 #' @export
@@ -74,19 +99,19 @@ bmab_gi_multiple_ab <- function(alpha_start=1, beta_start=1, gamma, N, num_actio
 
 #' Calculate Gittins indices for a single arm (Bernoulli rewards)
 #'
-#' The initial interval for calibration are as follows:
-#' For lower bound, use lb if supplied else use KGI if kgi=T or Sigma/n otherwise.
-#' For upper bound, use ub if supplied else use GI+ if giplus=T or 1 otherwise.
+#' There are two versions which differ only in their parameterisation and in the layout of the output.
+#' `bmab_gi()` uses `Sigma` and `n` parameters, while `bmab_gi_ab()` uses `alpha = Sigma`
+#' and  `beta = n - Sigma`.
 #'
-#' @param Sigma value of Sigma for the arm
-#' @param n value of n for the arm
-#' @param gamma discount factor
-#' @param tol absolute accuracy required
-#' @param N time horizon used
+#' The initial interval for calibration are as follows:
+#' For lower bound, use lb if supplied else use KGI if `kgi=T` or `Sigma/n` otherwise.
+#' For upper bound, use ub if supplied else use GI+ if `giplus=T` or `1` otherwise.
+#'
+#' @inheritParams bmab_args
 #' @param lb=NA optional lower bound for GI
 #' @param ub=NA optional upper bound for GI
-#' @param kgi=F optional boolean indicates whether to use KGI for lower bound (only if lb=NA)
-#' @param giplus=F optional boolean indicates whether to use GI+ for upper bound (only if ub=NA)
+#' @param kgi=F optional boolean indicates whether to use KGI for lower bound (only if `lb=NA`)
+#' @param giplus=F optional boolean indicates whether to use GI+ for upper bound (only if `ub=NA`)
 #'
 #' @return A single Gittins index
 #'
@@ -110,25 +135,10 @@ bmab_gi <- function(Sigma, n, gamma, tol, N, lb=NA, ub=NA, kgi=F, giplus=F){
   mean(calibrate_arm(bmab_gi_value, lb, ub, tol, Sigma, n, gamma, N))
 }
 
-#' Calculate Gittins indices for a single arm (Bernoulli rewards)
-#'
-#' This version uses alpha, beta parameterisation.
-#' The initial interval for calibration are as follows:
-#' For lower bound, use lb if supplied else use KGI if kgi=T or Sigma/n otherwise.
-#' For upper bound, use ub if supplied else use GI+ if giplus=T or 1 otherwise.
-#'
 #' @param alpha value of alpha for the arm
 #' @param beta value of beta for the arm
-#' @param gamma discount factor
-#' @param tol absolute accuracy required
-#' @param N time horizon used
-#' @param lb=NA optional lower bound for GI
-#' @param ub=NA optional upper bound for GI
-#' @param kgi=F optional boolean indicates whether to use KGI for lower bound (only if lb=NA)
-#' @param giplus=F optional boolean indicates whether to use GI+ for upper bound (only if ub=NA)
 #'
-#' @return A single Gittins index
-#'
+#' @rdname bmab_gi_multiple
 #'
 #' @export
 #'
@@ -140,10 +150,7 @@ bmab_gi_ab <- function(alpha, beta, gamma, tol, N, lb=NA, ub=NA, kgi=F, giplus=F
 #'
 #' Upper bound for GI.
 #'
-#' @param Sigma value of Sigma for the arm
-#' @param n value of n for the arm
-#' @param gamma discount factor
-#' @param tol absolute accuracy required
+#' @inheritParams bmab_args
 #' @param upper=F if TRUE, the upper end of the interval is returned, otherwise the midpoint
 #'
 #' @return A vector of GI+ values
@@ -162,9 +169,7 @@ bmab_giplus <- function(Sigma, n, gamma, tol, upper=F){
 #'
 #' Exact closed form calculation.
 #'
-#' @param Sigma value of Sigma for the arm
-#' @param n value of n for the arm
-#' @param gamma discount factor
+#' @inheritParams bmab_args
 #'
 #' @return A vector of KGI values
 #'
@@ -178,10 +183,8 @@ bmab_kgi <- function(Sigma, n, gamma){
 
 #' Value of one-armed bandit using GI+ (Bernoulli rewards)
 #'
-#' @param lambda reward from the known arm
-#' @param Sigma value of Sigma for the unknown arm
-#' @param n value of n for the unknown arm
-#' @param gamma discount factor
+#' @inheritParams bmab_v_args
+#' @inheritParams bmab_args
 #'
 #' @return Difference in value between safe and unknown arms
 #'
@@ -199,11 +202,8 @@ bmab_giplus_value <- function(lambda, Sigma, n, gamma){
 
 #' Value of one-armed bandit using KGI (Bernoulli rewards)
 #'
-#' @param lambda reward from the known arm
-#' @param Sigma value of Sigma for the unknown arm
-#' @param n value of n for the unknown arm
-#' @param gamma discount factor
-#' @param N time horizon used in the dynamic programme
+#' @inheritParams bmab_v_args
+#' @inheritParams bmab_args
 #'
 #' @return Difference in value between safe and unknown arms
 #'
