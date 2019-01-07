@@ -2,9 +2,13 @@
 % Please edit documentation in R/bmab.R
 \name{bmab_gi}
 \alias{bmab_gi}
+\alias{bmab_gi_ab}
 \title{Calculate Gittins indices for a single arm (Bernoulli rewards)}
 \usage{
 bmab_gi(Sigma, n, gamma, tol, N, lb = NA, ub = NA, kgi = F,
+  giplus = F)
+
+bmab_gi_ab(alpha, beta, gamma, tol, N, lb = NA, ub = NA, kgi = F,
   giplus = F)
 }
 \arguments{
@@ -17,6 +21,10 @@ bmab_gi(Sigma, n, gamma, tol, N, lb = NA, ub = NA, kgi = F,
 \item{tol}{absolute accuracy required}
 
 \item{N}{integer>0; time horizon used}
+
+\item{alpha}{value of alpha for the arm}
+
+\item{beta}{value of beta for the arm}
 
 \item{lb=NA}{optional lower bound for GI}
 

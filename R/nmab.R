@@ -172,6 +172,8 @@ nmab_kgi_value <- function(lambda, mu, n,  gamma, tau){
 #'
 #' Helper function only used in nmab_gi_value.
 #'
+#' @keywords internal
+#'
 nmab_risky_reward <- function(mu, y_lo_scaled, y_hi_scaled, tn_scaled, tau, s, value_vec, discount){
   yhi <- y_hi_scaled - mu * tn_scaled
   ylo <- y_lo_scaled - mu * tn_scaled

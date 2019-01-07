@@ -138,7 +138,7 @@ bmab_gi <- function(Sigma, n, gamma, tol, N, lb=NA, ub=NA, kgi=F, giplus=F){
 #' @param alpha value of alpha for the arm
 #' @param beta value of beta for the arm
 #'
-#' @rdname bmab_gi_multiple
+#' @rdname bmab_gi
 #'
 #' @export
 #'

@@ -3,7 +3,6 @@
 \name{bmab_gi_multiple}
 \alias{bmab_gi_multiple}
 \alias{bmab_gi_multiple_ab}
-\alias{bmab_gi_ab}
 \title{Calculate Gittins indices for multiple arms (Bernoulli rewards)}
 \usage{
 bmab_gi_multiple(Sigma_start = 1, n_start = 2, gamma, N, num_actions,
@@ -11,9 +10,6 @@ bmab_gi_multiple(Sigma_start = 1, n_start = 2, gamma, N, num_actions,
 
 bmab_gi_multiple_ab(alpha_start = 1, beta_start = 1, gamma, N,
   num_actions, tol)
-
-bmab_gi_ab(alpha, beta, gamma, tol, N, lb = NA, ub = NA, kgi = F,
-  giplus = F)
 }
 \arguments{
 \item{gamma}{numeric in (0, 1]; discount factor}
@@ -23,10 +19,6 @@ bmab_gi_ab(alpha, beta, gamma, tol, N, lb = NA, ub = NA, kgi = F,
 \item{num_actions}{determinines the number of states GI are calculated for}
 
 \item{tol}{absolute accuracy required}
-
-\item{alpha}{value of alpha for the arm}
-
-\item{beta}{value of beta for the arm}
 
 \item{Sigma_start=1}{lowest value of Sigma for the arms}
 

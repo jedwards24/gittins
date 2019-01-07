@@ -13,7 +13,7 @@
 #'
 calibrate_arm <- function(FUN, lb, ub, tol, ...){
   while ((ub - lb) > tol){
-    lambda <- (lb + ub) / 2
+    lambda <- lb + (ub - lb) / 2
     if (FUN(lambda, ...) > 0){
       lb <- lambda
     }else{

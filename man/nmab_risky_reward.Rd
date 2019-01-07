@@ -10,3 +10,4 @@ nmab_risky_reward(mu, y_lo_scaled, y_hi_scaled, tn_scaled, tau, s,
 \description{
 Helper function only used in nmab_gi_value.
 }
+\keyword{internal}
