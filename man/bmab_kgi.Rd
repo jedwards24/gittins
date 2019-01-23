@@ -14,8 +14,12 @@ bmab_kgi(Sigma, n, gamma)
 \item{gamma}{numeric in (0, 1]; discount factor}
 }
 \value{
-A vector of KGI values
+An index value or a vector of values
 }
 \description{
-Exact closed form calculation.
+The KGI is an lower bound for the Gittins index.
+}
+\details{
+This is an exact closed form calculation and arguments \code{Sigma} and \code{n} can be supplied as vectors in
+which case a vector of index values will be returned.
 }

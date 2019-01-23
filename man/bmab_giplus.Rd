@@ -18,8 +18,8 @@ bmab_giplus(Sigma, n, gamma, tol, upper = F)
 \item{upper=F}{if TRUE, the upper end of the interval is returned, otherwise the midpoint}
 }
 \value{
-A vector of GI+ values
+A GI+ index value
 }
 \description{
-Upper bound for GI.
+The GI+ index is an upper bound for the Gittins index.
 }

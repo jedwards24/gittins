@@ -39,8 +39,8 @@ while \code{bmab_gi_multiple_ab()} uses \code{alpha = Sigma} and  \code{beta = n
 \details{
 The states are a triangular matrix with:
 \itemize{
-\item \code{Sigma = Sigma_start : Sigma_start + num_actions - 1},
-\item \code{n = n_start : n_start + num_actions - 1},
+\item \code{Sigma = Sigma_start : (Sigma_start + num_actions - 1)},
+\item \code{n = n_start : (n_start + num_actions - 1)},
 \item \code{Sigma <= Sigma_start + n - n_start}.
 }
 }
