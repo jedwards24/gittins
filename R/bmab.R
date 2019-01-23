@@ -32,8 +32,8 @@ NULL
 #' while `bmab_gi_multiple_ab()` uses `alpha = Sigma` and  `beta = n - Sigma`.
 #'
 #' The states are a triangular matrix with:
-#' * `Sigma = Sigma_start : Sigma_start + num_actions - 1`,
-#' * `n = n_start : n_start + num_actions - 1`,
+#' * `Sigma = Sigma_start : (Sigma_start + num_actions - 1)`,
+#' * `n = n_start : (n_start + num_actions - 1)`,
 #' * `Sigma <= Sigma_start + n - n_start`.
 #'
 #' @inheritParams bmab_args
@@ -148,17 +148,17 @@ bmab_gi_ab <- function(alpha, beta, gamma, tol, N, lb=NA, ub=NA, kgi=F, giplus=F
 
 #' Calculate the GI+ index for a single arm (Bernoulli rewards)
 #'
-#' Upper bound for GI.
+#' The GI+ index is an upper bound for the Gittins index.
 #'
 #' @inheritParams bmab_args
 #' @param upper=F if TRUE, the upper end of the interval is returned, otherwise the midpoint
 #'
-#' @return A vector of GI+ values
+#' @return A GI+ index value
 #'
 #' @export
 #'
-bmab_giplus <- function(Sigma, n, gamma, tol, upper=F){
-  interval <- calibrate_arm(bmab_giplus_value, lb=Sigma / n, ub=1, tol, Sigma, n, gamma)
+bmab_giplus <- function(Sigma, n, gamma, tol, upper = F){
+  interval <- calibrate_arm(bmab_giplus_value, lb = Sigma / n, ub = 1, tol, Sigma, n, gamma)
   if (upper){
     return(interval[2])
   }
@@ -167,11 +167,15 @@ bmab_giplus <- function(Sigma, n, gamma, tol, upper=F){
 
 #' Calculate the knowledge gradient index for a single arm (Bernoulli rewards)
 #'
-#' Exact closed form calculation.
+#'
+#' The KGI is an lower bound for the Gittins index.
+#'
+#' This is an exact closed form calculation and arguments `Sigma` and `n` can be supplied as vectors in
+#' which case a vector of index values will be returned.
 #'
 #' @inheritParams bmab_args
 #'
-#' @return A vector of KGI values
+#' @return An index value or a vector of values
 #'
 #' @export
 #'
@@ -200,7 +204,7 @@ bmab_giplus_value <- function(lambda, Sigma, n, gamma){
   mu + mu * value_success + (1 - mu) * value_fail - lambda / (1 - gamma)
 }
 
-#' Value of one-armed bandit using KGI (Bernoulli rewards)
+#' Value of a one-armed bandit (Bernoulli rewards)
 #'
 #' @inheritParams bmab_v_args
 #' @inheritParams bmab_args

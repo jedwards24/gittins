@@ -31,7 +31,7 @@ NULL
 #'
 #' Assumes mu=0.
 #'
-#' @param n_range numeric vector giving values of n
+#' @param n_range numeric vector giving values of n (must be ascending)
 #' @inheritParams nmab_args
 #'
 #' @return A vector of GI values
