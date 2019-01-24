@@ -104,33 +104,23 @@ bmab_gi_multiple_ab <- function(alpha_start=1, beta_start=1, gamma, N, num_actio
 #' and  `beta = n - Sigma`.
 #'
 #' The initial interval for calibration are as follows:
-#' For lower bound, use lb if supplied else use KGI if `kgi=T` or `Sigma/n` otherwise.
-#' For upper bound, use ub if supplied else use GI+ if `giplus=T` or `1` otherwise.
+#' For lower bound, use lb if supplied else use KGI.
+#' For upper bound, use ub if supplied else use GI+.
 #'
 #' @inheritParams bmab_args
 #' @param lb=NA optional lower bound for GI
 #' @param ub=NA optional upper bound for GI
-#' @param kgi=F optional boolean indicates whether to use KGI for lower bound (only if `lb=NA`)
-#' @param giplus=F optional boolean indicates whether to use GI+ for upper bound (only if `ub=NA`)
 #'
 #' @return A single Gittins index
 #'
 #' @export
 #'
-bmab_gi <- function(Sigma, n, gamma, tol, N, lb=NA, ub=NA, kgi=F, giplus=F){
+bmab_gi <- function(Sigma, n, gamma, tol, N, lb=NA, ub=NA){
   if (is.na(lb)){
-    if (kgi){
-      lb <- bmab_kgi(Sigma, n, gamma)
-    }else{
-      lb <- Sigma / n
-    }
+    lb <- bmab_kgi(Sigma, n, gamma)
   }
   if (is.na(ub)){
-    if (giplus){
-      ub <- bmab_giplus(Sigma, n, gamma, tol, upper=T)
-    }else{
-      ub <- 1
-    }
+    ub <- bmab_giplus(Sigma, n, gamma, tol, upper=T)
   }
   mean(calibrate_arm(bmab_gi_value, lb, ub, tol, Sigma, n, gamma, N))
 }
@@ -142,8 +132,8 @@ bmab_gi <- function(Sigma, n, gamma, tol, N, lb=NA, ub=NA, kgi=F, giplus=F){
 #'
 #' @export
 #'
-bmab_gi_ab <- function(alpha, beta, gamma, tol, N, lb=NA, ub=NA, kgi=F, giplus=F){
-  bmab_gi(Sigma = alpha, n = alpha + beta, gamma, tol, N, lb, ub, kgi, giplus)
+bmab_gi_ab <- function(alpha, beta, gamma, tol, N, lb=NA, ub=NA){
+  bmab_gi(Sigma = alpha, n = alpha + beta, gamma, tol, N, lb, ub)
 }
 
 #' Calculate the GI+ index for a single arm (Bernoulli rewards)
