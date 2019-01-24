@@ -143,10 +143,7 @@ nmab_kgi <- function(Sigma, n, gamma, tau, tol, ub = NA, lower=F){
 #'
 nmab_giplus_value <- function(lambda, mu, n, gamma){
   sd <- sqrt(1 / n)
-  prob_retire <- pnorm(lambda, mu, sd)
-  integrand <- function(x) {dnorm(x, mu, sd) * x}
-  int <-  integrate(integrand, lambda, Inf)[[1]]
-  mu - lambda * prob_retire - lambda * (1 - prob_retire) / (1 - gamma) + gamma * int / (1 - gamma)
+  mu + gamma * dnorm(lambda / sd) * sd / (1 - gamma * pnorm(lambda / sd)) - lambda
 }
 
 #' Value of one-armed bandit using KGI (normal rewards)
