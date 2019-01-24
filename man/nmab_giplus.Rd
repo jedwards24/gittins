@@ -4,7 +4,7 @@
 \alias{nmab_giplus}
 \title{Calculate the GI+ index for a single arm (normal rewards)}
 \usage{
-nmab_giplus(Sigma, n, gamma, tol, lb, ub, upper = F)
+nmab_giplus(Sigma, n, gamma, tol, ub = NA, upper = F)
 }
 \arguments{
 \item{Sigma}{value of Sigma for the arm}

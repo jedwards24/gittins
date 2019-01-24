@@ -5,11 +5,9 @@
 \alias{bmab_gi_ab}
 \title{Calculate Gittins indices for a single arm (Bernoulli rewards)}
 \usage{
-bmab_gi(Sigma, n, gamma, tol, N, lb = NA, ub = NA, kgi = F,
-  giplus = F)
+bmab_gi(Sigma, n, gamma, tol, N, lb = NA, ub = NA)
 
-bmab_gi_ab(alpha, beta, gamma, tol, N, lb = NA, ub = NA, kgi = F,
-  giplus = F)
+bmab_gi_ab(alpha, beta, gamma, tol, N, lb = NA, ub = NA)
 }
 \arguments{
 \item{Sigma}{value of Sigma for the arm}
@@ -29,10 +27,6 @@ bmab_gi_ab(alpha, beta, gamma, tol, N, lb = NA, ub = NA, kgi = F,
 \item{lb=NA}{optional lower bound for GI}
 
 \item{ub=NA}{optional upper bound for GI}
-
-\item{kgi=F}{optional boolean indicates whether to use KGI for lower bound (only if \code{lb=NA})}
-
-\item{giplus=F}{optional boolean indicates whether to use GI+ for upper bound (only if \code{ub=NA})}
 }
 \value{
 A single Gittins index
@@ -44,6 +38,6 @@ and  \code{beta = n - Sigma}.
 }
 \details{
 The initial interval for calibration are as follows:
-For lower bound, use lb if supplied else use KGI if \code{kgi=T} or \code{Sigma/n} otherwise.
-For upper bound, use ub if supplied else use GI+ if \code{giplus=T} or \code{1} otherwise.
+For lower bound, use lb if supplied else use KGI.
+For upper bound, use ub if supplied else use GI+.
 }

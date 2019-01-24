@@ -21,5 +21,5 @@ nmab_kgi_value(lambda, mu, n, gamma, tau)
 Difference in value between safe and unknown arms
 }
 \description{
-Calculation is as given in Ryzhov, Powell & Frazier (2012).
+Calculation is as given in Ryzhov, Powell & Frazier (2012), simplified since \code{lambda>=mu} always when called here.
 }

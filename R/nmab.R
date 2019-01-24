@@ -151,7 +151,7 @@ nmab_giplus_value <- function(lambda, mu, n, gamma){
 
 #' Value of one-armed bandit using KGI (normal rewards)
 #'
-#' Calculation is as given in Ryzhov, Powell & Frazier (2012).
+#' Calculation is as given in Ryzhov, Powell & Frazier (2012), simplified since `lambda>=mu` always when called here.
 #'
 #' @inheritParams nmab_v_args
 #' @inheritParams nmab_args
@@ -160,9 +160,9 @@ nmab_giplus_value <- function(lambda, mu, n, gamma){
 #'
 #' @export
 #'
-nmab_kgi_value <- function(lambda, mu, n,  gamma, tau){
+nmab_kgi_value <- function(lambda, mu, n, gamma, tau){
   sigt <- sqrt(1 / n - 1 / (n + tau))
-  z <- -abs((mu - lambda) / sigt)
+  z <- (mu - lambda) / sigt
   v <- sigt * (z * pnorm(z) + dnorm(z))
   v * gamma / (1 - gamma) + mu - lambda
 }

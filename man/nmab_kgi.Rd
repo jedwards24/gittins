@@ -4,7 +4,7 @@
 \alias{nmab_kgi}
 \title{Calculate the knowledge gradient index for a single arm (normal rewards)}
 \usage{
-nmab_kgi(Sigma, n, gamma, tau, tol, ub, lower = F)
+nmab_kgi(Sigma, n, gamma, tau, tol, ub = NA, lower = F)
 }
 \arguments{
 \item{Sigma}{value of Sigma for the arm}
