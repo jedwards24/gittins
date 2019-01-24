@@ -6,7 +6,7 @@
 #'
 #' @param Sigma value of Sigma for the arm
 #' @param n value of n for the arm
-#' @param gamma numeric in (0, 1]; discount factor
+#' @param gamma numeric in (0, 1); discount factor
 #' @param tol absolute accuracy required
 #' @param N integer>0; time horizon used
 
@@ -77,11 +77,7 @@ bmab_gi_multiple_ab <- function(alpha_start=1, beta_start=1, gamma, N, num_actio
   alpha_range <- alpha_start : (alpha_start + num_actions - 1)
   beta_range <- beta_start : (beta_start + num_actions - 1)
   mu <- alpha_start / (alpha_start + beta_range)
-  if (gamma==1){
-    lb_vec <- mu
-  }else{
-    lb_vec <- bmab_kgi(alpha_start, alpha_start + beta_range, gamma)
-  }
+  lb_vec <- bmab_kgi(alpha_start, alpha_start + beta_range, gamma)
   cat("Calculating GI values for", as.integer(0.5 * num_actions * (num_actions + 1)), "states\n")
   pb <- txtProgressBar(min = 0, max = num_actions, style = 3)
   for (a in 1 : num_actions){
@@ -210,13 +206,8 @@ bmab_gi_value <- function(lambda, Sigma, n, gamma, N){
   mu <- outer(s_vec, n_vec, "/")
   value_mat <- matrix(nrow=h, ncol=h)
   # Values of end states
-  if (gamma==1){
-    value_mat[, h] <- pmax(mu[, h], lambda)
-    safe_reward <- lambda * (N + 2 - (1 : N))
-  }else{
-    value_mat[, h] <- pmax(mu[, h], lambda) * gamma ^ N / (1 - gamma)
-    safe_reward <- lambda * gamma ^ ((1 : N) - 1) / (1 - gamma)
-  }
+  value_mat[, h] <- pmax(mu[, h], lambda) * gamma ^ N / (1 - gamma)
+  safe_reward <- lambda * gamma ^ ((1 : N) - 1) / (1 - gamma)
   # Run DP to get values of other states
   for (i in N : 1){
     j <- i + 1

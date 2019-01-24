@@ -6,7 +6,7 @@
 #'
 #' @param Sigma value of Sigma for the arm
 #' @param n value of n for the arm
-#' @param gamma discount factor
+#' @param gamma numeric in (0, 1); discount factor
 #' @param tau observation precision
 #' @param tol absolute accuracy required
 #' @param N time horizon used
