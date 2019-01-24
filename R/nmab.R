@@ -49,7 +49,7 @@ nmab_gi_multiple <- function(n_range, gamma, tau, tol, N, xi, delta){
   cat("Calculating GI values for", nn, "states (may be slow)\n")
   pb <- txtProgressBar(min = 0, max = nn, style = 3)
   for (i in 1 : nn){
-    gi_vec[i] <- nmab_gi(0, n_range[i], gamma, tau, tol, N, xi, delta, ub=ub, kgi=T)
+    gi_vec[i] <- nmab_gi(0, n_range[i], gamma, tau, tol, N, xi, delta, ub=ub)
     ub <- gi_vec[i]
     setTxtProgressBar(pb, i)
   }
@@ -60,33 +60,23 @@ nmab_gi_multiple <- function(n_range, gamma, tau, tol, N, xi, delta){
 #' Calculate the Gittins index for a single arm (normal rewards)
 #'
 #' The initial interval for calibration are as follows:
-#' For lower bound, use lb if supplied else use KGI if `kgi=T` or `Sigma/n` otherwise.
-#' For upper bound, use ub if supplied else use GI+ if `giplus=T` or `gamma/((1 - gamma) * sqrt(n))` otherwise.
+#' For lower bound, use lb if supplied else use KGI.
+#' For upper bound, use ub if supplied else use GI+.
 #'
 #' @inheritParams nmab_args
 #' @param lb=NA optional lower bound for GI
 #' @param ub=NA optional upper bound for GI
-#' @param kgi=T optional boolean indicates whether to use KGI for lower bound (only if `lb=NA`)
-#' @param giplus=T optional boolean indicates whether to use GI+ for upper bound (only if `ub=NA`)
 #'
 #' @return A vector of GI values
 #'
 #' @export
 #'
-nmab_gi <- function(Sigma, n, gamma, tau, tol, N, xi, delta, lb=NA, ub=NA, kgi=T, giplus=T){
+nmab_gi <- function(Sigma, n, gamma, tau, tol, N, xi, delta, lb=NA, ub=NA){
   if (is.na(lb)){
-    if (kgi){
-      lb <- nmab_kgi(0, n, gamma, tau, tol, ub, lower=T)
-    }else{
-      lb <- 0
-    }
+    lb <- nmab_kgi(0, n, gamma, tau, tol, ub, lower=T)
   }
   if (is.na(ub)){
-    if (giplus){
-      ub <- nmab_giplus(0, n, gamma, tol, ub, upper=T)
-    }else{
-      ub <- gamma / (1 - gamma) / sqrt(n)
-    }
+    ub <- nmab_giplus(0, n, gamma, tol, ub, upper=T)
   }
   interval <- Sigma / n + calibrate_arm(nmab_gi_value, lb, ub, tol, n, gamma, tau, N, xi, delta)
   mean(interval)
