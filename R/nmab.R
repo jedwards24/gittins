@@ -45,7 +45,7 @@ nmab_gi_multiple <- function(n_range, gamma, tau, tol, N, xi, delta){
   nn <- length(n_range)
   gi_vec <- numeric(nn)
   ubbl <- gamma / (1 - gamma) / sqrt(n_range[1])
-  ub <- nmab_giplus(0, n_range[1], gamma, tol, lb=0, ub=ubbl, upper=T)
+  ub <- nmab_giplus(0, n_range[1], gamma, tol, ub=ubbl, upper=T)
   cat("Calculating GI values for", nn, "states (may be slow)\n")
   pb <- txtProgressBar(min = 0, max = nn, style = 3)
   for (i in 1 : nn){
@@ -83,7 +83,7 @@ nmab_gi <- function(Sigma, n, gamma, tau, tol, N, xi, delta, lb=NA, ub=NA, kgi=T
   }
   if (is.na(ub)){
     if (giplus){
-      ub <- nmab_giplus(0, n, gamma, tol, lb, ub, upper=T)
+      ub <- nmab_giplus(0, n, gamma, tol, ub, upper=T)
     }else{
       ub <- gamma / (1 - gamma) / sqrt(n)
     }
@@ -103,9 +103,9 @@ nmab_gi <- function(Sigma, n, gamma, tau, tol, N, xi, delta, lb=NA, ub=NA, kgi=T
 #'
 #' @export
 #'
-nmab_giplus <- function(Sigma, n, gamma, tol, lb, ub, upper=F){
-  ubbl <- gamma / (1 - gamma) / sqrt(n)
-  interval <- Sigma / n + calibrate_arm(nmab_giplus_value, lb=0, ub=ubbl, tol, mu=0, n, gamma)
+nmab_giplus <- function(Sigma, n, gamma, tol, ub = NA, upper = F){
+  if(is.na(ub)){ub <- gamma / (1 - gamma) / sqrt(n)}
+  interval <- Sigma / n + calibrate_arm(nmab_giplus_value, lb = 0, ub = ub, tol, mu = 0, n, gamma)
   if (upper){
     return(interval[2])
   }
@@ -123,7 +123,7 @@ nmab_giplus <- function(Sigma, n, gamma, tol, lb, ub, upper=F){
 #'
 #' @export
 #'
-nmab_kgi <- function(Sigma, n, gamma, tau, tol, ub, lower=F){
+nmab_kgi <- function(Sigma, n, gamma, tau, tol, ub = NA, lower=F){
   if(is.na(ub)){ub <- gamma / (1 - gamma) / sqrt(n)}
   interval <- Sigma / n + calibrate_arm(nmab_kgi_value, lb=0, ub, tol, mu=0, n, gamma, tau)
   if (lower){
