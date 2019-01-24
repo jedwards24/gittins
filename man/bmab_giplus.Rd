@@ -11,7 +11,7 @@ bmab_giplus(Sigma, n, gamma, tol, upper = F)
 
 \item{n}{value of n for the arm}
 
-\item{gamma}{numeric in (0, 1]; discount factor}
+\item{gamma}{numeric in (0, 1); discount factor}
 
 \item{tol}{absolute accuracy required}
 

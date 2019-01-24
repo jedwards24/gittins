@@ -9,7 +9,7 @@ nmab_gi_multiple(n_range, gamma, tau, tol, N, xi, delta)
 \arguments{
 \item{n_range}{numeric vector giving values of n (must be ascending)}
 
-\item{gamma}{discount factor}
+\item{gamma}{numeric in (0, 1); discount factor}
 
 \item{tau}{observation precision}
 

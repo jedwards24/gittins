@@ -13,7 +13,7 @@ bmab_gi_value(lambda, Sigma, n, gamma, N)
 
 \item{n}{value of n for the unknown arm}
 
-\item{gamma}{numeric in (0, 1]; discount factor}
+\item{gamma}{numeric in (0, 1); discount factor}
 
 \item{N}{integer>0; time horizon used}
 }

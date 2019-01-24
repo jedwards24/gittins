@@ -11,7 +11,7 @@ bmab_kgi(Sigma, n, gamma)
 
 \item{n}{value of n for the arm}
 
-\item{gamma}{numeric in (0, 1]; discount factor}
+\item{gamma}{numeric in (0, 1); discount factor}
 }
 \value{
 An index value or a vector of values

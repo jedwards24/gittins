@@ -12,7 +12,7 @@ bmab_gi_multiple_ab(alpha_start = 1, beta_start = 1, gamma, N,
   num_actions, tol)
 }
 \arguments{
-\item{gamma}{numeric in (0, 1]; discount factor}
+\item{gamma}{numeric in (0, 1); discount factor}
 
 \item{N}{integer>0; time horizon used}
 

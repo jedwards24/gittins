@@ -13,7 +13,7 @@ nmab_kgi_value(lambda, mu, n, gamma, tau)
 
 \item{n}{value of n for the unknown arm}
 
-\item{gamma}{discount factor}
+\item{gamma}{numeric in (0, 1); discount factor}
 
 \item{tau}{observation precision}
 }
