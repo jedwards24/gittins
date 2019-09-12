@@ -4,7 +4,7 @@ This is an R package to calculate Gittins indices for the multi-armed bandit pro
 
 ## Description
 
-This project contains functions written in R to calculate Gittins indices for the Bayesian multi-armed bandit problem with Bernoulli or Normal rewards. More information on the methodology can be found in my [thesis](http://eprints.lancs.ac.uk/84589/) (in Chapter 5).
+This project contains functions written in R to calculate Gittins indices for the Bayesian multi-armed bandit problem with Bernoulli or Normal rewards. More information on the methodology can be found in this [paper](https://arxiv.org/abs/1909.05075) and in my [thesis](http://eprints.lancs.ac.uk/84589/) (in Chapter 5).
 
 ## Installation
 
