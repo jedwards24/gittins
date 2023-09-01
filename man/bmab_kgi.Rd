@@ -7,14 +7,14 @@
 bmab_kgi(Sigma, n, gamma)
 }
 \arguments{
-\item{Sigma}{value of Sigma for the arm}
+\item{Sigma}{value of Sigma for the arm.}
 
-\item{n}{value of n for the arm}
+\item{n}{value of n for the arm.}
 
-\item{gamma}{numeric in (0, 1); discount factor}
+\item{gamma}{numeric in (0, 1); discount factor.}
 }
 \value{
-An index value or a vector of values
+An index value or a vector of values.
 }
 \description{
 The KGI is an lower bound for the Gittins index.

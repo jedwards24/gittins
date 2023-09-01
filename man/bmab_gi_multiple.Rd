@@ -5,31 +5,36 @@
 \alias{bmab_gi_multiple_ab}
 \title{Calculate Gittins indices for multiple arms (Bernoulli rewards)}
 \usage{
-bmab_gi_multiple(Sigma_start = 1, n_start = 2, gamma, N, num_actions,
-  tol)
+bmab_gi_multiple(Sigma_start = 1, n_start = 2, gamma, N, num_actions, tol)
 
-bmab_gi_multiple_ab(alpha_start = 1, beta_start = 1, gamma, N,
-  num_actions, tol)
+bmab_gi_multiple_ab(
+  alpha_start = 1,
+  beta_start = 1,
+  gamma,
+  N,
+  num_actions,
+  tol
+)
 }
 \arguments{
-\item{gamma}{numeric in (0, 1); discount factor}
+\item{Sigma_start}{Lowest value of Sigma for the arms.}
 
-\item{N}{integer>0; time horizon used}
+\item{n_start}{Lowest value of n for the arms.}
 
-\item{num_actions}{determinines the number of states GI are calculated for}
+\item{gamma}{numeric in (0, 1); discount factor.}
 
-\item{tol}{absolute accuracy required}
+\item{N}{integer>0; time horizon used.}
 
-\item{Sigma_start=1}{lowest value of Sigma for the arms}
+\item{num_actions}{Determines the number of states GI are calculated for.}
 
-\item{n_start=2}{lowest value of n for the arms}
+\item{tol}{absolute accuracy required.}
 
-\item{alpha_start=1}{lowest value of alpha for the arms}
+\item{alpha_start}{Lowest value of alpha for the arms.}
 
-\item{beta_start=1}{lowest value of beta for the arms}
+\item{beta_start}{Lowest value of beta for the arms.}
 }
 \value{
-A triangular matrix of GI values
+A triangular matrix of GI values.
 }
 \description{
 There are two versions which differ only in their parameterisation and in the layout of the output.
@@ -39,8 +44,8 @@ while \code{bmab_gi_multiple_ab()} uses \code{alpha = Sigma} and  \code{beta = n
 \details{
 The states are a triangular matrix with:
 \itemize{
-\item \code{Sigma = Sigma_start : (Sigma_start + num_actions - 1)},
-\item \code{n = n_start : (n_start + num_actions - 1)},
+\item \code{Sigma = Sigma_start:(Sigma_start + num_actions - 1)},
+\item \code{n = n_start:(n_start + num_actions - 1)},
 \item \code{Sigma <= Sigma_start + n - n_start}.
 }
 }

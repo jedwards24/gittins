@@ -13,10 +13,10 @@ nmab_giplus_value(lambda, mu, n, gamma)
 
 \item{n}{value of n for the unknown arm}
 
-\item{gamma}{numeric in (0, 1); discount factor}
+\item{gamma}{numeric in (0, 1); discount factor.}
 }
 \value{
-Difference in value between safe and unknown arms
+Difference in value between safe and unknown arms.
 }
 \description{
 Value of one-armed bandit using GI+ (normal rewards)

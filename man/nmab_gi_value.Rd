@@ -11,19 +11,19 @@ nmab_gi_value(lambda, n, gamma, tau, N, xi, delta)
 
 \item{n}{value of n for the unknown arm}
 
-\item{gamma}{numeric in (0, 1); discount factor}
+\item{gamma}{numeric in (0, 1); discount factor.}
 
-\item{tau}{observation precision}
+\item{tau}{observation precision.}
 
-\item{N}{time horizon used}
+\item{N}{time horizon used.}
 
-\item{xi}{value of xi (entent of dynamic programmme state space)}
+\item{xi}{value of xi (entent of dynamic programmme state space).}
 
-\item{delta}{value of delta (fineness of discretisation in the dynamic programmme)}
+\item{delta}{value of delta (fineness of discretisation in the dynamic programmme).}
 }
 \value{
-Difference in value between safe and unknown arms
+Difference in value between safe and unknown arms.
 }
 \description{
-Assumes \code{Sigma=mu=0}.
+Assumes \code{Sigma = mu = 0}.
 }

@@ -4,12 +4,11 @@
 #'
 #' @name bmab_args
 #'
-#' @param Sigma value of Sigma for the arm
-#' @param n value of n for the arm
-#' @param gamma numeric in (0, 1); discount factor
-#' @param tol absolute accuracy required
-#' @param N integer>0; time horizon used
-
+#' @param Sigma value of Sigma for the arm.
+#' @param n value of n for the arm.
+#' @param gamma numeric in (0, 1); discount factor.
+#' @param tol absolute accuracy required.
+#' @param N integer>0; time horizon used.
 #'
 NULL
 
@@ -19,10 +18,9 @@ NULL
 #'
 #' @name bmab_v_args
 #'
-#' @param lambda reward from the known arm
-#' @param Sigma mean of reward belief for the unknown arm
-#' @param n value of n for the unknown arm
-#'
+#' @param lambda reward from the known arm.
+#' @param Sigma mean of reward belief for the unknown arm.
+#' @param n value of n for the unknown arm.
 NULL
 
 #' Calculate Gittins indices for multiple arms (Bernoulli rewards)
@@ -32,24 +30,23 @@ NULL
 #' while `bmab_gi_multiple_ab()` uses `alpha = Sigma` and  `beta = n - Sigma`.
 #'
 #' The states are a triangular matrix with:
-#' * `Sigma = Sigma_start : (Sigma_start + num_actions - 1)`,
-#' * `n = n_start : (n_start + num_actions - 1)`,
+#' * `Sigma = Sigma_start:(Sigma_start + num_actions - 1)`,
+#' * `n = n_start:(n_start + num_actions - 1)`,
 #' * `Sigma <= Sigma_start + n - n_start`.
 #'
 #' @inheritParams bmab_args
-#' @param Sigma_start=1 lowest value of Sigma for the arms
-#' @param n_start=2 lowest value of n for the arms
-#' @param num_actions determinines the number of states GI are calculated for
+#' @param Sigma_start Lowest value of Sigma for the arms.
+#' @param n_start Lowest value of n for the arms.
+#' @param num_actions Determines the number of states GI are calculated for.
 #'
-#' @return A triangular matrix of GI values
-#'
+#' @return A triangular matrix of GI values.
 #' @export
-#'
-bmab_gi_multiple <- function(Sigma_start=1, n_start=2, gamma, N, num_actions, tol){
-  GI <- bmab_gi_multiple_ab(alpha_start=Sigma_start, beta_start=n_start - Sigma_start,
+bmab_gi_multiple <- function(Sigma_start = 1, n_start = 2, gamma, N, num_actions, tol){
+  GI <- bmab_gi_multiple_ab(alpha_start = Sigma_start,
+                            beta_start = n_start - Sigma_start,
                             gamma, N, num_actions, tol)
-  for(i in 2 : num_actions){
-    GI[, i] <- c(rep(NA, i - 1), GI[1 : (num_actions - i + 1), i])
+  for(i in 2:num_actions){
+    GI[, i] <- c(rep(NA, i - 1), GI[1:(num_actions - i + 1), i])
   }
   GI
 }
@@ -61,8 +58,8 @@ bmab_gi_multiple <- function(Sigma_start=1, n_start=2, gamma, N, num_actions, to
 # beta=beta_start, beta_start + 1, ..., beta_start + num_actions - 1,
 # and alpha + beta <= num_actions + alpha_start + beta_start - 1.
 
-#' @param alpha_start=1 lowest value of alpha for the arms
-#' @param beta_start=1 lowest value of beta for the arms
+#' @param alpha_start Lowest value of alpha for the arms.
+#' @param beta_start Lowest value of beta for the arms.
 #'
 #' @rdname bmab_gi_multiple
 #'
@@ -72,18 +69,18 @@ bmab_gi_multiple <- function(Sigma_start=1, n_start=2, gamma, N, num_actions, to
 #'
 #' @export
 #'
-bmab_gi_multiple_ab <- function(alpha_start=1, beta_start=1, gamma, N, num_actions, tol){
-  GI <- matrix(rep(NA, num_actions * num_actions), nrow=num_actions, ncol=num_actions)
-  alpha_range <- alpha_start : (alpha_start + num_actions - 1)
-  beta_range <- beta_start : (beta_start + num_actions - 1)
+bmab_gi_multiple_ab <- function(alpha_start = 1, beta_start = 1, gamma, N, num_actions, tol){
+  GI <- matrix(rep(NA, num_actions * num_actions), nrow = num_actions, ncol = num_actions)
+  alpha_range <- alpha_start:(alpha_start + num_actions - 1)
+  beta_range <- beta_start:(beta_start + num_actions - 1)
   mu <- alpha_start / (alpha_start + beta_range)
   lb_vec <- bmab_kgi(alpha_start, alpha_start + beta_range, gamma)
   cat("Calculating GI values for", as.integer(0.5 * num_actions * (num_actions + 1)), "states\n")
   pb <- txtProgressBar(min = 0, max = num_actions, style = 3)
-  for (a in 1 : num_actions){
+  for (a in 1:num_actions){
     ub <- 1
-    for (b in 1 : (num_actions - a + 1)){
-      GI[b, a] <- bmab_gi_ab(alpha_range[a], beta_range[b], gamma, tol, N, lb=lb_vec[b], ub=ub)
+    for (b in 1:(num_actions - a + 1)){
+      GI[b, a] <- bmab_gi_ab(alpha_range[a], beta_range[b], gamma, tol, N, lb = lb_vec[b], ub = ub)
       ub <- GI[b, a]
     }
     lb_vec <- GI[, a]
@@ -104,31 +101,27 @@ bmab_gi_multiple_ab <- function(alpha_start=1, beta_start=1, gamma, N, num_actio
 #' For upper bound, use ub if supplied else use GI+.
 #'
 #' @inheritParams bmab_args
-#' @param lb=NA optional lower bound for GI
-#' @param ub=NA optional upper bound for GI
+#' @param lb Optional lower bound for GI.
+#' @param ub Optional upper bound for GI.
 #'
 #' @return A single Gittins index
-#'
 #' @export
-#'
-bmab_gi <- function(Sigma, n, gamma, tol, N, lb=NA, ub=NA){
+bmab_gi <- function(Sigma, n, gamma, tol, N, lb = NA, ub = NA){
   if (is.na(lb)){
     lb <- bmab_kgi(Sigma, n, gamma)
   }
   if (is.na(ub)){
-    ub <- bmab_giplus(Sigma, n, gamma, tol, upper=T)
+    ub <- bmab_giplus(Sigma, n, gamma, tol, upper = TRUE)
   }
   mean(calibrate_arm(bmab_gi_value, lb, ub, tol, Sigma, n, gamma, N))
 }
 
-#' @param alpha value of alpha for the arm
-#' @param beta value of beta for the arm
+#' @param alpha Value of alpha for the arm.
+#' @param beta Value of beta for the arm.
 #'
 #' @rdname bmab_gi
-#'
 #' @export
-#'
-bmab_gi_ab <- function(alpha, beta, gamma, tol, N, lb=NA, ub=NA){
+bmab_gi_ab <- function(alpha, beta, gamma, tol, N, lb = NA, ub = NA){
   bmab_gi(Sigma = alpha, n = alpha + beta, gamma, tol, N, lb, ub)
 }
 
@@ -137,13 +130,11 @@ bmab_gi_ab <- function(alpha, beta, gamma, tol, N, lb=NA, ub=NA){
 #' The GI+ index is an upper bound for the Gittins index.
 #'
 #' @inheritParams bmab_args
-#' @param upper=F if TRUE, the upper end of the interval is returned, otherwise the midpoint
+#' @param upper if TRUE, the upper end of the interval is returned, otherwise the midpoint.
 #'
-#' @return A GI+ index value
-#'
+#' @return A GI+ index value.
 #' @export
-#'
-bmab_giplus <- function(Sigma, n, gamma, tol, upper = F){
+bmab_giplus <- function(Sigma, n, gamma, tol, upper = FALSE){
   interval <- calibrate_arm(bmab_giplus_value, lb = Sigma / n, ub = 1, tol, Sigma, n, gamma)
   if (upper){
     return(interval[2])
@@ -153,7 +144,6 @@ bmab_giplus <- function(Sigma, n, gamma, tol, upper = F){
 
 #' Calculate the knowledge gradient index for a single arm (Bernoulli rewards)
 #'
-#'
 #' The KGI is an lower bound for the Gittins index.
 #'
 #' This is an exact closed form calculation and arguments `Sigma` and `n` can be supplied as vectors in
@@ -161,10 +151,8 @@ bmab_giplus <- function(Sigma, n, gamma, tol, upper = F){
 #'
 #' @inheritParams bmab_args
 #'
-#' @return An index value or a vector of values
-#'
+#' @return An index value or a vector of values.
 #' @export
-#'
 bmab_kgi <- function(Sigma, n, gamma){
   mu <- Sigma / n
   H <- gamma / (1 - gamma)
@@ -177,9 +165,7 @@ bmab_kgi <- function(Sigma, n, gamma){
 #' @inheritParams bmab_args
 #'
 #' @return Difference in value between safe and unknown arms
-#'
 #' @export
-#'
 bmab_giplus_value <- function(lambda, Sigma, n, gamma){
   mu <- Sigma / n
   mu_success <- (Sigma + 1) / (n + 1)
@@ -195,25 +181,23 @@ bmab_giplus_value <- function(lambda, Sigma, n, gamma){
 #' @inheritParams bmab_v_args
 #' @inheritParams bmab_args
 #'
-#' @return Difference in value between safe and unknown arms
-#'
+#' @return Difference in value between safe and unknown arms.
 #' @export
-#'
 bmab_gi_value <- function(lambda, Sigma, n, gamma, N){
   h <- N + 1
-  n_vec <- n : (n + N)
-  s_vec <- Sigma : (Sigma + N)
+  n_vec <- n:(n + N)
+  s_vec <- Sigma:(Sigma + N)
   mu <- outer(s_vec, n_vec, "/")
-  value_mat <- matrix(nrow=h, ncol=h)
+  value_mat <- matrix(nrow = h, ncol = h)
   # Values of end states
-  value_mat[, h] <- pmax(mu[, h], lambda) * gamma ^ N / (1 - gamma)
-  safe_reward <- lambda * gamma ^ ((1 : N) - 1) / (1 - gamma)
+  value_mat[, h] <- pmax(mu[, h], lambda) * gamma^N / (1 - gamma)
+  safe_reward <- lambda * gamma^((1:N) - 1) / (1 - gamma)
   # Run DP to get values of other states
-  for (i in N : 1){
+  for (i in N:1){
     j <- i + 1
-    risky_reward <- mu[1 : i, i] * (gamma ^ (i - 1) + value_mat[2 : j, j]) +
-      (1 - mu[1 : i, i]) * value_mat[1 : i, j]
-    value_mat[1 : i, i] <- pmax(risky_reward, safe_reward[i])
+    risky_reward <- mu[1:i, i] * (gamma^(i - 1) + value_mat[2:j, j]) +
+      (1 - mu[1:i, i]) * value_mat[1:i, j]
+    value_mat[1:i, i] <- pmax(risky_reward, safe_reward[i])
   }
   return(value_mat[1, 1] - lambda / (1 - gamma))
 }

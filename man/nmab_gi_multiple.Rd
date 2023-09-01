@@ -7,27 +7,27 @@
 nmab_gi_multiple(n_range, gamma, tau, tol, N, xi, delta)
 }
 \arguments{
-\item{n_range}{numeric vector giving values of n (must be ascending)}
+\item{n_range}{numeric vector giving values of n (must be ascending).}
 
-\item{gamma}{numeric in (0, 1); discount factor}
+\item{gamma}{numeric in (0, 1); discount factor.}
 
-\item{tau}{observation precision}
+\item{tau}{observation precision.}
 
-\item{tol}{absolute accuracy required}
+\item{tol}{absolute accuracy required.}
 
-\item{N}{time horizon used}
+\item{N}{time horizon used.}
 
-\item{xi}{value of xi (entent of dynamic programmme state space)}
+\item{xi}{value of xi (entent of dynamic programmme state space).}
 
-\item{delta}{value of delta (fineness of discretisation in the dynamic programmme)}
+\item{delta}{value of delta (fineness of discretisation in the dynamic programmme).}
 }
 \value{
-A vector of GI values
+A vector of GI values.
 }
 \description{
-Assumes mu=0.
+Assumes mu = 0.
 }
 \examples{
-nmab_gi_multiple(1 : 20, gamma = 0.9, tau = 1, tol = 5e-5, N = 30, xi = 3, delta = 0.02)
+nmab_gi_multiple(1:10, gamma = 0.9, tau = 1, tol = 5e-5, N = 30, xi = 3, delta = 0.02)
 
 }

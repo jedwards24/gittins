@@ -4,23 +4,23 @@
 \alias{nmab_kgi}
 \title{Calculate the knowledge gradient index for a single arm (normal rewards)}
 \usage{
-nmab_kgi(Sigma, n, gamma, tau, tol, ub = NA, lower = F)
+nmab_kgi(Sigma, n, gamma, tau, tol, ub = NA, lower = FALSE)
 }
 \arguments{
-\item{Sigma}{value of Sigma for the arm}
+\item{Sigma}{value of Sigma for the arm.}
 
-\item{n}{value of n for the arm}
+\item{n}{value of n for the arm.}
 
-\item{gamma}{numeric in (0, 1); discount factor}
+\item{gamma}{numeric in (0, 1); discount factor.}
 
-\item{tau}{observation precision}
+\item{tau}{observation precision.}
 
-\item{tol}{absolute accuracy required}
+\item{tol}{absolute accuracy required.}
 
-\item{lower=F}{if TRUE, the lower end of the interval is returned, otherwise the midpoint}
+\item{lower}{If TRUE, the lower end of the interval is returned, otherwise the midpoint.}
 }
 \value{
-A vector of GI values
+A vector of GI values.
 }
 \description{
 The index is an lower bound for GI.

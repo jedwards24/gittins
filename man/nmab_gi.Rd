@@ -7,31 +7,31 @@
 nmab_gi(Sigma, n, gamma, tau, tol, N, xi, delta, lb = NA, ub = NA)
 }
 \arguments{
-\item{Sigma}{value of Sigma for the arm}
+\item{Sigma}{value of Sigma for the arm.}
 
-\item{n}{value of n for the arm}
+\item{n}{value of n for the arm.}
 
-\item{gamma}{numeric in (0, 1); discount factor}
+\item{gamma}{numeric in (0, 1); discount factor.}
 
-\item{tau}{observation precision}
+\item{tau}{observation precision.}
 
-\item{tol}{absolute accuracy required}
+\item{tol}{absolute accuracy required.}
 
-\item{N}{time horizon used}
+\item{N}{time horizon used.}
 
-\item{xi}{value of xi (entent of dynamic programmme state space)}
+\item{xi}{value of xi (entent of dynamic programmme state space).}
 
-\item{delta}{value of delta (fineness of discretisation in the dynamic programmme)}
+\item{delta}{value of delta (fineness of discretisation in the dynamic programmme).}
 
-\item{lb=NA}{optional lower bound for GI}
+\item{lb}{Optional lower bound for GI.}
 
-\item{ub=NA}{optional upper bound for GI}
+\item{ub}{Optional upper bound for GI.}
 }
 \value{
-A vector of GI values
+A vector of GI values.
 }
 \description{
 The initial interval for calibration are as follows:
-For lower bound, use lb if supplied else use KGI.
-For upper bound, use ub if supplied else use GI+.
+For lower bound, use \code{lb} if supplied else use KGI.
+For upper bound, use \code{ub} if supplied else use GI+.
 }

@@ -4,21 +4,21 @@
 \alias{bmab_giplus}
 \title{Calculate the GI+ index for a single arm (Bernoulli rewards)}
 \usage{
-bmab_giplus(Sigma, n, gamma, tol, upper = F)
+bmab_giplus(Sigma, n, gamma, tol, upper = FALSE)
 }
 \arguments{
-\item{Sigma}{value of Sigma for the arm}
+\item{Sigma}{value of Sigma for the arm.}
 
-\item{n}{value of n for the arm}
+\item{n}{value of n for the arm.}
 
-\item{gamma}{numeric in (0, 1); discount factor}
+\item{gamma}{numeric in (0, 1); discount factor.}
 
-\item{tol}{absolute accuracy required}
+\item{tol}{absolute accuracy required.}
 
-\item{upper=F}{if TRUE, the upper end of the interval is returned, otherwise the midpoint}
+\item{upper}{if TRUE, the upper end of the interval is returned, otherwise the midpoint.}
 }
 \value{
-A GI+ index value
+A GI+ index value.
 }
 \description{
 The GI+ index is an upper bound for the Gittins index.
