@@ -8,5 +8,8 @@ Description: Calculates Gittins indices for the multi-armed bandit problem.
 License: MIT + file LICENCE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.1.1
+RoxygenNote: 7.2.3
 Roxygen: list(markdown = TRUE)
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
