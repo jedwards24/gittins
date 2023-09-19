@@ -5,7 +5,7 @@ Version: 0.1.0.9000
 Author: James Edwards <jamese1326+gh@gmail.com> 
 Maintainer: James Edwards <jamese1326+gh@gmail.com>
 Description: Calculates Gittins indices for the multi-armed bandit problem.
-License: MIT + file LICENCE
+License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.2.3
