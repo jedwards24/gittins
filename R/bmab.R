@@ -168,12 +168,17 @@ bmab_kgi <- function(Sigma, n, gamma){
 #' @export
 bmab_giplus_value <- function(lambda, Sigma, n, gamma){
   mu <- Sigma / n
-  mu_success <- (Sigma + 1) / (n + 1)
   H <- gamma / (1 - gamma)
-  continue <- function(x) {dbeta(x, Sigma + 1, n - Sigma) * x}
-  value_success <- H * (integrate(continue, lambda, 1)[[1]] + lambda * pbeta(lambda, Sigma + 1, n - Sigma))
+  value_success <- H * (integrate(continue, lambda, 1, Sigma = Sigma, n = n)[[1]] +
+                          lambda * pbeta(lambda, Sigma + 1, n - Sigma))
   value_fail <- H * lambda
   mu + mu * value_success + (1 - mu) * value_fail - lambda / (1 - gamma)
+}
+
+#' Helper function only used in bmab_giplus_value()
+#' @noRd
+continue <- function(x, Sigma, n){
+  dbeta(x, Sigma + 1, n - Sigma) * x
 }
 
 #' Value of a one-armed bandit (Bernoulli rewards)

@@ -17,6 +17,8 @@ nmab_kgi(Sigma, n, gamma, tau, tol, ub = NA, lower = FALSE)
 
 \item{tol}{absolute accuracy required.}
 
+\item{ub}{Optional upper bound for the index.}
+
 \item{lower}{If TRUE, the lower end of the interval is returned, otherwise the midpoint.}
 }
 \value{

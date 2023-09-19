@@ -149,8 +149,7 @@ nmab_kgi_value <- function(lambda, mu, n, gamma, tau){
 #' Reward of the risky arm in a one-armed bandit process
 #'
 #' Helper function only used in nmab_gi_value.
-#'
-#' @keywords internal
+#' @noRd
 nmab_risky_reward <- function(mu, y_lo_scaled, y_hi_scaled, tn_scaled, tau, s, value_vec, discount){
   yhi <- y_hi_scaled - mu * tn_scaled
   ylo <- y_lo_scaled - mu * tn_scaled
@@ -160,9 +159,9 @@ nmab_risky_reward <- function(mu, y_lo_scaled, y_hi_scaled, tn_scaled, tau, s, v
                      sum(p * value_vec))
 }
 
-# This version (2018-07) adds an extra block of states which have V calculated directly using only the mu and no
-# further learning. The values of these states are used in the calculation of values for
-# the other states. The new states are have higher mu values: the original states are within xi
+# This version (2018-07) adds an extra block of states which have V calculated directly using only
+# the mu and no further learning. The values of these states are used in the calculation of values for
+# the other states. The new states have higher mu values: the original states are within xi
 # standard deviations, the new states within xi + EXTRA standard deviations. EXTRA = 1 works well.
 
 #' Value calculation for the one-armed bandit with Normal rewards.
@@ -217,7 +216,10 @@ nmab_gi_value <- function(lambda, n, gamma, tau, N, xi, delta){
   # Value of risky arm in starting state at time 0
   s <- sqrt(1 / n + 1 / tau)
   value_vec = value[2, ]
-  risky_reward <- nmab_risky_reward(mu_range[1], y_lo_scaled = lo * (n + tau) / tau, y_hi_scaled = hi * (n + tau) / tau,
-                                    tn_scaled = n / tau, tau, s, value_vec, discount = 1)
+  risky_reward <- nmab_risky_reward(mu_range[1],
+                                    y_lo_scaled = lo * (n + tau) / tau,
+                                    y_hi_scaled = hi * (n + tau) / tau,
+                                    tn_scaled = n / tau,
+                                    tau, s, value_vec, discount = 1)
   return(risky_reward - lambda / (1 - gamma))
 }

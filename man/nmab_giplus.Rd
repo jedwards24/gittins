@@ -15,6 +15,8 @@ nmab_giplus(Sigma, n, gamma, tol, ub = NA, upper = FALSE)
 
 \item{tol}{absolute accuracy required.}
 
+\item{ub}{Optional upper bound for the index.}
+
 \item{upper}{If TRUE, the upper end of the interval is returned, otherwise the midpoint.}
 }
 \value{

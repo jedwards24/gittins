@@ -7,18 +7,18 @@
 calibrate_arm(FUN, lb, ub, tol, ...)
 }
 \arguments{
-\item{FUN}{a value function.}
+\item{FUN}{A value function.}
 
-\item{lb}{initial lower end of interval.}
+\item{lb}{Initial lower end of interval.}
 
-\item{ub}{initial upper end of interval.}
+\item{ub}{Initial upper end of interval.}
 
-\item{tol}{absolute accuracy required.}
+\item{tol}{Absolute accuracy required.}
 
 \item{...}{Other arguments passed to \code{FUN}.}
 }
 \value{
-A vector of lower and upper end of an interval containing the true value
+A vector of lower and upper end of an interval containing the true value.
 }
 \description{
 Performs iterative reduction of an interval using calibration with value function FUN.
