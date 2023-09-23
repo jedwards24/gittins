@@ -7,13 +7,13 @@
 bmab_giplus(Sigma, n, gamma, tol, upper = FALSE)
 }
 \arguments{
-\item{Sigma}{value of Sigma for the arm.}
+\item{Sigma}{Value of Sigma for the arm.}
 
-\item{n}{value of n for the arm.}
+\item{n}{Value of n for the arm.}
 
-\item{gamma}{numeric in (0, 1); discount factor.}
+\item{gamma}{Numeric in (0, 1); discount factor.}
 
-\item{tol}{absolute accuracy required.}
+\item{tol}{Absolute accuracy required.}
 
 \item{upper}{if TRUE, the upper end of the interval is returned, otherwise the midpoint.}
 }

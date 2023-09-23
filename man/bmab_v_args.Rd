@@ -4,11 +4,11 @@
 \alias{bmab_v_args}
 \title{Function arguments for value functions}
 \arguments{
-\item{lambda}{reward from the known arm.}
+\item{lambda}{Reward from the known arm.}
 
-\item{Sigma}{mean of reward belief for the unknown arm.}
+\item{Sigma}{Mean of reward belief for the unknown arm.}
 
-\item{n}{value of n for the unknown arm.}
+\item{n}{Value of n for the unknown arm.}
 }
 \description{
 Function arguments for value functions

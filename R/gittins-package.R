@@ -1,5 +1,5 @@
 #' @keywords internal
-#' @importFrom stats dbeta dnorm integrate pbeta pnorm
+#' @importFrom stats dbeta dnorm integrate pbeta pnorm na.omit
 #' @importFrom utils setTxtProgressBar txtProgressBar
 "_PACKAGE"
 

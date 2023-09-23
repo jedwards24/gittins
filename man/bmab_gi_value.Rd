@@ -7,15 +7,15 @@
 bmab_gi_value(lambda, Sigma, n, gamma, N)
 }
 \arguments{
-\item{lambda}{reward from the known arm.}
+\item{lambda}{Reward from the known arm.}
 
-\item{Sigma}{mean of reward belief for the unknown arm.}
+\item{Sigma}{Mean of reward belief for the unknown arm.}
 
-\item{n}{value of n for the unknown arm.}
+\item{n}{Value of n for the unknown arm.}
 
-\item{gamma}{numeric in (0, 1); discount factor.}
+\item{gamma}{Numeric in (0, 1); discount factor.}
 
-\item{N}{integer>0; time horizon used.}
+\item{N}{Integer > 0; time horizon used.}
 }
 \value{
 Difference in value between safe and unknown arms.

@@ -7,11 +7,11 @@
 bmab_kgi(Sigma, n, gamma)
 }
 \arguments{
-\item{Sigma}{value of Sigma for the arm.}
+\item{Sigma}{Value of Sigma for the arm.}
 
-\item{n}{value of n for the arm.}
+\item{n}{Value of n for the arm.}
 
-\item{gamma}{numeric in (0, 1); discount factor.}
+\item{gamma}{Numeric in (0, 1); discount factor.}
 }
 \value{
 An index value or a vector of values.

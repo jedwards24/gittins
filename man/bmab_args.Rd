@@ -4,15 +4,15 @@
 \alias{bmab_args}
 \title{Function arguments}
 \arguments{
-\item{Sigma}{value of Sigma for the arm.}
+\item{Sigma}{Value of Sigma for the arm.}
 
-\item{n}{value of n for the arm.}
+\item{n}{Value of n for the arm.}
 
-\item{gamma}{numeric in (0, 1); discount factor.}
+\item{gamma}{Numeric in (0, 1); discount factor.}
 
-\item{tol}{absolute accuracy required.}
+\item{tol}{Absolute accuracy required.}
 
-\item{N}{integer>0; time horizon used.}
+\item{N}{Integer > 0; time horizon used.}
 }
 \description{
 Function arguments

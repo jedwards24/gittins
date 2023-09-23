@@ -10,15 +10,15 @@ bmab_gi(Sigma, n, gamma, tol, N, lb = NA, ub = NA)
 bmab_gi_ab(alpha, beta, gamma, tol, N, lb = NA, ub = NA)
 }
 \arguments{
-\item{Sigma}{value of Sigma for the arm.}
+\item{Sigma}{Value of Sigma for the arm.}
 
-\item{n}{value of n for the arm.}
+\item{n}{Value of n for the arm.}
 
-\item{gamma}{numeric in (0, 1); discount factor.}
+\item{gamma}{Numeric in (0, 1); discount factor.}
 
-\item{tol}{absolute accuracy required.}
+\item{tol}{Absolute accuracy required.}
 
-\item{N}{integer>0; time horizon used.}
+\item{N}{Integer > 0; time horizon used.}
 
 \item{lb}{Optional lower bound for GI.}
 

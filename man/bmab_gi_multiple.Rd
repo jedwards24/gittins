@@ -2,55 +2,59 @@
 % Please edit documentation in R/bmab.R
 \name{bmab_gi_multiple}
 \alias{bmab_gi_multiple}
-\alias{bmab_gi_multiple_ab}
-\title{Calculate Gittins indices for multiple arms (Bernoulli rewards)}
+\title{Calculate Gittins indices for multiple starting states (Bernoulli rewards)}
 \usage{
-bmab_gi_multiple(Sigma_start = 1, n_start = 2, gamma, N, num_actions, tol)
-
-bmab_gi_multiple_ab(
-  alpha_start = 1,
-  beta_start = 1,
+bmab_gi_multiple(
+  alpha_start = NULL,
+  beta_start = NULL,
   gamma,
   N,
   num_actions,
-  tol
+  tol = 0.0005,
+  Sigma_start = NULL,
+  n_start = NULL
 )
 }
 \arguments{
-\item{Sigma_start}{Lowest value of Sigma for the arms.}
-
-\item{n_start}{Lowest value of n for the arms.}
-
-\item{gamma}{numeric in (0, 1); discount factor.}
-
-\item{N}{integer>0; time horizon used.}
-
-\item{num_actions}{Determines the number of states GI are calculated for.}
-
-\item{tol}{absolute accuracy required.}
-
 \item{alpha_start}{Lowest value of alpha for the arms.}
 
 \item{beta_start}{Lowest value of beta for the arms.}
+
+\item{gamma}{Numeric in (0, 1); discount factor.}
+
+\item{N}{Integer > 0; time horizon used.}
+
+\item{num_actions}{Determines the number of states GI are calculated for.}
+
+\item{tol}{Absolute accuracy required.}
+
+\item{Sigma_start}{Lowest value of Sigma for the arms.}
+
+\item{n_start}{Lowest value of n for the arms.}
 }
 \value{
-A triangular matrix of GI values.
+A data frame of starting states and GI values. Extra information is stored in attributes:
+\itemize{
+\item \code{params}: the parameters used.
+\item \code{gi_matrix}: the GI values in a matrix (beta x alpha).
+\item \code{gi_matrix_ns}: the GI values in a matrix (n x Sigma).
+}
 }
 \description{
-There are two versions which differ only in their parameterisation and in the layout of the output.
-\code{bmab_gi_multiple()} uses \code{Sigma} and \code{n} parameters,
-while \code{bmab_gi_multiple_ab()} uses \code{alpha = Sigma} and  \code{beta = n - Sigma}.
-}
-\details{
-The states are a triangular matrix with:
+Runs \code{bmab_gi()} multiple times for a range of arm starting states. The starting states used are
+determined by the arguments \code{alpha_start}, \code{beta_start}, and \code{num_actions} and are:
 \itemize{
-\item \code{Sigma = Sigma_start:(Sigma_start + num_actions - 1)},
-\item \code{n = n_start:(n_start + num_actions - 1)},
-\item \code{Sigma <= Sigma_start + n - n_start}.
+\item \code{alpha = alpha_start : (alpha_start_start + num_actions - 1)},
+\item \code{beta = beta_start : (beta_start + num_actions - 1)},
+\item where \code{alpha + beta <= num_actions + alpha_start + beta_start - 1}.
 }
+
+Alternatively, you can supply \code{Sigma_start} and \code{n_start} instead of \code{alpha_start} and \code{beta_start}.
+The function will behave in the same way using \code{alpha = Sigma} and  \code{beta = n - Sigma}. Give either
+alpha/beta or Sigma/n - do not mix the two forms.
 }
 \examples{
-bmab_gi_multiple(1, 2, gamma = 0.9, N = 80, num_actions = 20, tol = 5e-5)
-bmab_gi_multiple_ab(1, 1, gamma = 0.9, N = 80, num_actions = 20, tol = 5e-5)
+bmab_gi_multiple(1, 1, gamma = 0.9, N = 80, num_actions = 5)
+bmab_gi_multiple(gamma = 0.9, N = 80, num_actions = 5, Sigma_start = 1, n_start = 2)
 
 }
