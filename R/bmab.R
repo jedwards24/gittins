@@ -25,17 +25,18 @@ NULL
 
 #' Calculate Gittins indices for multiple starting states (Bernoulli rewards)
 #'
-#' @description
-#'
 #' Runs `bmab_gi()` multiple times for a range of arm starting states. The starting states used are
-#' determined by the arguments `alpha_start`, `beta_start`, and `num_actions` and are:
+#' determined by the starting state arguments  and `num_actions` (see details). Other arguments are
+#' passed to `bmab_gi()`.
+#'
+#' @details
+#' The starting states are either given in alpha/beta or Sigma/n form (strictly one or the other).
+#' These are alternative ways of doing the same thing since  `alpha = Sigma` and  `beta = n - Sigma`.
+#'
+#' The GI are calculated for arms with the following states:
 #' * `alpha = alpha_start : (alpha_start_start + num_actions - 1)`,
 #' * `beta = beta_start : (beta_start + num_actions - 1)`,
 #' * where `alpha + beta <= num_actions + alpha_start + beta_start - 1`.
-#'
-#' Alternatively, you can supply `Sigma_start` and `n_start` instead of `alpha_start` and `beta_start`.
-#' The function will behave in the same way using `alpha = Sigma` and  `beta = n - Sigma`. Give either
-#' alpha/beta or Sigma/n - do not mix the two forms.
 #'
 #' @inheritParams bmab_args
 #' @param alpha_start Lowest value of alpha for the arms.
@@ -44,17 +45,23 @@ NULL
 #' @param n_start Lowest value of n for the arms.
 #' @param num_actions Determines the number of states GI are calculated for.
 #'
-#' @return A data frame of starting states and GI values. Extra information is stored in attributes:
+#' @return A data frame of starting states and GI values. Extra information is stored in attributes
+#' (see examples):
 #' * `params`: the parameters used.
 #' * `gi_matrix`: the GI values in a matrix (beta x alpha).
 #' * `gi_matrix_ns`: the GI values in a matrix (n x Sigma).
 #'
 #' @examples
-#' bmab_gi_multiple(1, 1, gamma = 0.9, N = 80, num_actions = 5)
-#' bmab_gi_multiple(gamma = 0.9, N = 80, num_actions = 5, Sigma_start = 1, n_start = 2)
+#' b1 <- bmab_gi_multiple(1, 1, num_actions = 4, gamma = 0.8, N = 20)
+#' b2 <- bmab_gi_multiple(num_actions = 4, gamma = 0.8, N = 20, Sigma_start = 1, n_start = 2)
+#' identical(b1, b2) # TRUE
+#' # View attributes
+#' attr(b1, "params")
+#' attr(b1, "gi_matrix")
+#' attr(b1, "gi_matrix_ns")
 #'
 #' @export
-bmab_gi_multiple <- function(alpha_start = NULL, beta_start = NULL, gamma, N, num_actions, tol = 5e-4,
+bmab_gi_multiple <- function(alpha_start = NULL, beta_start = NULL, num_actions, gamma, N, tol = 5e-4,
                              Sigma_start = NULL, n_start = NULL){
   if (!check_start_args(alpha_start = alpha_start, beta_start = beta_start,
                         Sigma_start = Sigma_start, n_start = n_start)){
@@ -111,13 +118,13 @@ bmab_gi_multiple <- function(alpha_start = NULL, beta_start = NULL, gamma, N, nu
 
 #' Check if the correct starting state arguments have values
 #'
-#' Helper for `bmab_gi_multiple()`. Returns `TRUE` if okay, `FALSE` otherwise.
+#' Helper for `bmab_gi_multiple()`. Returns `TRUE` if arguments are okay, `FALSE` otherwise.
 #' @noRd
 check_start_args <- function(alpha_start = NULL, beta_start = NULL, Sigma_start = NULL, n_start = NULL) {
   if (is.null(alpha_start) + is.null(beta_start) == 1) return(FALSE)
   if (is.null(Sigma_start) + is.null(n_start) == 1) return(FALSE)
-  use_ns <- !is.null(Sigma_start) && !is.null(n_start)
-  return(xor(!is.null(alpha_start) && !is.null(beta_start), use_ns))
+  return(xor(!is.null(alpha_start) && !is.null(beta_start),
+             !is.null(Sigma_start) && !is.null(n_start)))
 }
 
 #' Calculate Gittins indices for a single arm (Bernoulli rewards)
@@ -136,7 +143,7 @@ check_start_args <- function(alpha_start = NULL, beta_start = NULL, Sigma_start 
 #'
 #' @return A single Gittins index
 #' @export
-bmab_gi <- function(Sigma, n, gamma, tol, N, lb = NA, ub = NA){
+bmab_gi <- function(Sigma, n, gamma, N, tol = 5e-4, lb = NA, ub = NA){
   if (is.na(lb)){
     lb <- bmab_kgi(Sigma, n, gamma)
   }
@@ -151,8 +158,8 @@ bmab_gi <- function(Sigma, n, gamma, tol, N, lb = NA, ub = NA){
 #'
 #' @rdname bmab_gi
 #' @export
-bmab_gi_ab <- function(alpha, beta, gamma, tol, N, lb = NA, ub = NA){
-  bmab_gi(Sigma = alpha, n = alpha + beta, gamma, tol, N, lb, ub)
+bmab_gi_ab <- function(alpha, beta, gamma, N, tol = 5e-4, lb = NA, ub = NA){
+  bmab_gi(Sigma = alpha, n = alpha + beta, gamma = gamma, N = N, tol = tol, lb = lb, ub = ub)
 }
 
 #' Calculate the GI+ index for a single arm (Bernoulli rewards)
@@ -164,7 +171,7 @@ bmab_gi_ab <- function(alpha, beta, gamma, tol, N, lb = NA, ub = NA){
 #'
 #' @return A GI+ index value.
 #' @export
-bmab_giplus <- function(Sigma, n, gamma, tol, upper = FALSE){
+bmab_giplus <- function(Sigma, n, gamma, tol = 5e-4, upper = FALSE){
   interval <- calibrate_arm(bmab_giplus_value, lb = Sigma / n, ub = 1, tol, Sigma, n, gamma)
   if (upper){
     return(interval[2])
@@ -194,7 +201,7 @@ bmab_kgi <- function(Sigma, n, gamma){
 #' @inheritParams bmab_v_args
 #' @inheritParams bmab_args
 #'
-#' @return Difference in value between safe and unknown arms
+#' @return Difference in value between safe and unknown arms.
 #' @export
 bmab_giplus_value <- function(lambda, Sigma, n, gamma){
   mu <- Sigma / n

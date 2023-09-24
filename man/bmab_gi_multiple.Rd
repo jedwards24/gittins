@@ -7,10 +7,10 @@
 bmab_gi_multiple(
   alpha_start = NULL,
   beta_start = NULL,
+  num_actions,
   gamma,
   N,
-  num_actions,
-  tol = 0.0005,
+  tol = 5e-04,
   Sigma_start = NULL,
   n_start = NULL
 )
@@ -20,11 +20,11 @@ bmab_gi_multiple(
 
 \item{beta_start}{Lowest value of beta for the arms.}
 
+\item{num_actions}{Determines the number of states GI are calculated for.}
+
 \item{gamma}{Numeric in (0, 1); discount factor.}
 
 \item{N}{Integer > 0; time horizon used.}
-
-\item{num_actions}{Determines the number of states GI are calculated for.}
 
 \item{tol}{Absolute accuracy required.}
 
@@ -33,7 +33,8 @@ bmab_gi_multiple(
 \item{n_start}{Lowest value of n for the arms.}
 }
 \value{
-A data frame of starting states and GI values. Extra information is stored in attributes:
+A data frame of starting states and GI values. Extra information is stored in attributes
+(see examples):
 \itemize{
 \item \code{params}: the parameters used.
 \item \code{gi_matrix}: the GI values in a matrix (beta x alpha).
@@ -42,19 +43,27 @@ A data frame of starting states and GI values. Extra information is stored in at
 }
 \description{
 Runs \code{bmab_gi()} multiple times for a range of arm starting states. The starting states used are
-determined by the arguments \code{alpha_start}, \code{beta_start}, and \code{num_actions} and are:
+determined by the starting state arguments  and \code{num_actions} (see details). Other arguments are
+passed to \code{bmab_gi()}.
+}
+\details{
+The starting states are either given in alpha/beta or Sigma/n form (strictly one or the other).
+These are alternative ways of doing the same thing since  \code{alpha = Sigma} and  \code{beta = n - Sigma}.
+
+The GI are calculated for arms with the following states:
 \itemize{
 \item \code{alpha = alpha_start : (alpha_start_start + num_actions - 1)},
 \item \code{beta = beta_start : (beta_start + num_actions - 1)},
 \item where \code{alpha + beta <= num_actions + alpha_start + beta_start - 1}.
 }
-
-Alternatively, you can supply \code{Sigma_start} and \code{n_start} instead of \code{alpha_start} and \code{beta_start}.
-The function will behave in the same way using \code{alpha = Sigma} and  \code{beta = n - Sigma}. Give either
-alpha/beta or Sigma/n - do not mix the two forms.
 }
 \examples{
-bmab_gi_multiple(1, 1, gamma = 0.9, N = 80, num_actions = 5)
-bmab_gi_multiple(gamma = 0.9, N = 80, num_actions = 5, Sigma_start = 1, n_start = 2)
+b1 <- bmab_gi_multiple(1, 1, num_actions = 4, gamma = 0.8, N = 20)
+b2 <- bmab_gi_multiple(num_actions = 4, gamma = 0.8, N = 20, Sigma_start = 1, n_start = 2)
+identical(b1, b2) # TRUE
+# View attributes
+attr(b1, "params")
+attr(b1, "gi_matrix")
+attr(b1, "gi_matrix_ns")
 
 }

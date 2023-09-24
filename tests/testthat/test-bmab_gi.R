@@ -1,6 +1,6 @@
 test_that("bmab_gi gives expected output", {
-  x1 <- bmab_gi_ab(3, 2, 0.8, 1e-4, 20)
-  x2 <- bmab_gi(3, 5, 0.8, 1e-4, 20)
+  x1 <- bmab_gi_ab(3, 2, gamma = 0.8, N = 20, tol = 1e-4)
+  x2 <- bmab_gi(3, 5, gamma = 0.8, N = 20, tol = 1e-4)
   expect_identical(x1, x2)
   expect_equal(x1, 0.67143994)
 })

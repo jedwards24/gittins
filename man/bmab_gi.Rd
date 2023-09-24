@@ -5,9 +5,9 @@
 \alias{bmab_gi_ab}
 \title{Calculate Gittins indices for a single arm (Bernoulli rewards)}
 \usage{
-bmab_gi(Sigma, n, gamma, tol, N, lb = NA, ub = NA)
+bmab_gi(Sigma, n, gamma, N, tol = 5e-04, lb = NA, ub = NA)
 
-bmab_gi_ab(alpha, beta, gamma, tol, N, lb = NA, ub = NA)
+bmab_gi_ab(alpha, beta, gamma, N, tol = 5e-04, lb = NA, ub = NA)
 }
 \arguments{
 \item{Sigma}{Value of Sigma for the arm.}
@@ -16,9 +16,9 @@ bmab_gi_ab(alpha, beta, gamma, tol, N, lb = NA, ub = NA)
 
 \item{gamma}{Numeric in (0, 1); discount factor.}
 
-\item{tol}{Absolute accuracy required.}
-
 \item{N}{Integer > 0; time horizon used.}
+
+\item{tol}{Absolute accuracy required.}
 
 \item{lb}{Optional lower bound for GI.}
 

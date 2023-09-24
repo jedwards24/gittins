@@ -10,8 +10,8 @@ test_that("bmab_gi_multiple() arg checks work", {
 })
 
 test_that("bmab_gi_multiple() gives correct output", {
-  b1 <- bmab_gi_multiple(alpha_start = 2, beta_start = 1, gamma = 0.5, N = 20, num_actions = 2)
-  b2 <- bmab_gi_multiple(Sigma_start = 2, n_start = 3, gamma = 0.5, N = 20, num_actions = 2)
+  b1 <- bmab_gi_multiple(alpha_start = 2, beta_start = 1, num_actions = 2, gamma = 0.5, N = 20)
+  b2 <- bmab_gi_multiple(Sigma_start = 2, n_start = 3, num_actions = 2, gamma = 0.5, N = 20)
   expect_identical(b1, b2)
   expect_s3_class(b1, "data.frame")
   expect_true(all(c("params", "gi_matrix", "gi_matrix_ns") %in% names(attributes(b1))))

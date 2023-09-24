@@ -21,10 +21,10 @@ There are two main groups of functions, those for the multi-armed bandit with be
 
 ### Bernoulli Rewards
 
-Give the starting state of the problem (using two parameters, `alpha` and `beta`) and the number of actions that will be taken. These define the possible states the arm could take and therefore the states for which Gittins indices are needed, which are returned by the following function as a triangular matrix:
+Give the starting state of the problem (using two parameters, `alpha` and `beta`) and the number of actions that will be taken. These define the possible states the arm could take and therefore the states for which Gittins indices are needed, which are returned by the following function in a data frame:
 
 ``` r
-bmab_gi_multiple(alpha_start = 1, beta_start = 1, gamma = 0.9, N = 80, num_actions = 20, tol = 5e-5)
+bmab_gi_multiple(alpha_start = 1, beta_start = 1, num_actions = 10, gamma = 0.9, N = 80, tol = 5e-5)
 ```
 
 The other arguments used are:  the discount factor `gamma` of the problem; the desired accuracy `tol`; and the horizon `N` of the dynamic programme. The first of these come from the problem while the last two affect the calculation accuracy and speed. The alternative parameterisation of `Sigma` and `n` can be used by giving `Sigma_start` and `n_start` arguments instead of `alpha_start` and `beta_start`.
