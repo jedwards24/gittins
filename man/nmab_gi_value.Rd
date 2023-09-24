@@ -4,26 +4,41 @@
 \alias{nmab_gi_value}
 \title{Value calculation for the one-armed bandit with Normal rewards.}
 \usage{
-nmab_gi_value(lambda, n, gamma, tau, N, xi, delta)
+nmab_gi_value(lambda, n, gamma, tau, N, xi, delta, extra_xi = 1)
 }
 \arguments{
-\item{lambda}{reward from the known arm}
+\item{lambda}{Reward from the known arm}
 
-\item{n}{value of n for the unknown arm}
+\item{n}{Value of n for the unknown arm}
 
-\item{gamma}{numeric in (0, 1); discount factor.}
+\item{gamma}{Numeric in (0, 1); discount factor.}
 
-\item{tau}{observation precision.}
+\item{tau}{Observation precision.}
 
-\item{N}{time horizon used.}
+\item{N}{Time horizon used.}
 
-\item{xi}{value of xi (entent of dynamic programmme state space).}
+\item{xi}{Value of xi (entent of dynamic program state space).}
 
-\item{delta}{value of delta (fineness of discretisation in the dynamic programmme).}
+\item{delta}{Value of delta (fineness of discretisation in the dynamic program).}
+
+\item{extra_xi}{Extend xi using a fast approximation. See details}
 }
 \value{
 Difference in value between safe and unknown arms.
 }
 \description{
 Assumes \code{Sigma = mu = 0}.
+}
+\details{
+The \code{extra_xi} argument was a later addition to the algorithm, not included in the paper, which
+improves accuracy at low computational cost.
+
+Normally, states outside the width of the state space are ignored (taken to have a value of zero).
+This saves computation for states that are unlikely to be visited. However, the calculation can
+be improved with relatively little computation by giving some of these states a value using
+their mean reward only (no further learning). Although this is an approximation it will always
+be more accurate than using zero. So there are two blacks of states: the original states are
+within xi standard deviations and are calculated in detail using dynamic programming; and the
+new states within xi + extra_xi standard deviations. I have found \code{extra_xi = 1} works well and
+have set this as the default. This is value that should be used unless doing research on its effect.
 }

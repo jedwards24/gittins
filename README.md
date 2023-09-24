@@ -27,14 +27,14 @@ Give the starting state of the problem (using two parameters, `alpha` and `beta`
 bmab_gi_multiple(alpha_start = 1, beta_start = 1, num_actions = 10, gamma = 0.9, N = 80, tol = 5e-5)
 ```
 
-The other arguments used are:  the discount factor `gamma` of the problem; the desired accuracy `tol`; and the horizon `N` of the dynamic programme. The first of these come from the problem while the last two affect the calculation accuracy and speed. The alternative parameterisation of `Sigma` and `n` can be used by giving `Sigma_start` and `n_start` arguments instead of `alpha_start` and `beta_start`.
+The other arguments used are:  the discount factor `gamma` of the problem; the desired accuracy `tol`; and the horizon `N` of the dynamic program. The first of these come from the problem while the last two affect the calculation accuracy and speed. The alternative parameterisation of `Sigma` and `n` can be used by giving `Sigma_start` and `n_start` arguments instead of `alpha_start` and `beta_start`.
 
 ### Normal Rewards
 
 For this problem, Gittins indices are only needed for a single vector of states defined by the parameter `n`. These are given by `n_range` (which must be ascending). The following function calculates indices assuming our mean belief in reward of the arms is zero (indices for different values can be found by a simple transform):
 
 ``` r
-nmab_gi_multiple(n_range = 1 : 20, gamma = 0.9, tau = 1, tol = 5e-5, N = 30, xi = 3, delta = 0.02)
+nmab_gi_multiple(n_range = 1 : 10, gamma = 0.9, tau = 1, tol = 5e-5, N = 30, xi = 3, delta = 0.02)
 ```
 
 The arguments `gamma` and `tau` are problem settings while the remaining arguments affect the solution accuracy. Calculations for the NMAB can be much slower than for the BMAB especially if high accuracy is required.

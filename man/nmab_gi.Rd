@@ -4,24 +4,24 @@
 \alias{nmab_gi}
 \title{Calculate the Gittins index for a single arm (normal rewards)}
 \usage{
-nmab_gi(Sigma, n, gamma, tau, tol, N, xi, delta, lb = NA, ub = NA)
+nmab_gi(Sigma, n, gamma, tau, N, xi, delta, tol = 0.0005, lb = NA, ub = NA)
 }
 \arguments{
-\item{Sigma}{value of Sigma for the arm.}
+\item{Sigma}{Value of Sigma for the arm.}
 
-\item{n}{value of n for the arm.}
+\item{n}{Value of n for the arm.}
 
-\item{gamma}{numeric in (0, 1); discount factor.}
+\item{gamma}{Numeric in (0, 1); discount factor.}
 
-\item{tau}{observation precision.}
+\item{tau}{Observation precision.}
 
-\item{tol}{absolute accuracy required.}
+\item{N}{Time horizon used.}
 
-\item{N}{time horizon used.}
+\item{xi}{Value of xi (entent of dynamic program state space).}
 
-\item{xi}{value of xi (entent of dynamic programmme state space).}
+\item{delta}{Value of delta (fineness of discretisation in the dynamic program).}
 
-\item{delta}{value of delta (fineness of discretisation in the dynamic programmme).}
+\item{tol}{Absolute accuracy required.}
 
 \item{lb}{Optional lower bound for GI.}
 
@@ -32,6 +32,8 @@ A vector of GI values.
 }
 \description{
 The initial interval for calibration are as follows:
-For lower bound, use \code{lb} if supplied else use KGI.
-For upper bound, use \code{ub} if supplied else use GI+.
+\itemize{
+\item For lower bound, use \code{lb} if supplied else use KGI.
+\item For upper bound, use \code{ub} if supplied else use GI+.
+}
 }

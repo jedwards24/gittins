@@ -1,6 +1,6 @@
 test_that("nmab_gi gives expected output", {
-  x1 <- nmab_gi(0, 1, 0.8, 1, 1e-4, 30, 3, 0.1)
-  x2 <- nmab_gi(1, 1, 0.8, 1, 1e-4, 30, 3, 0.1)
+  x1 <- nmab_gi(0, 1, 0.8, 1, 30, 3, 0.1, 1e-4)
+  x2 <- nmab_gi(1, 1, 0.8, 1, 30, 3, 0.1, 1e-4)
   expect_identical(x1 + 1, x2)
   expect_equal(x1, 0.50552724)
 })

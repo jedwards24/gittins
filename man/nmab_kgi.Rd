@@ -4,18 +4,18 @@
 \alias{nmab_kgi}
 \title{Calculate the knowledge gradient index for a single arm (normal rewards)}
 \usage{
-nmab_kgi(Sigma, n, gamma, tau, tol, ub = NA, lower = FALSE)
+nmab_kgi(Sigma, n, gamma, tau, tol = 0.0005, ub = NA, lower = FALSE)
 }
 \arguments{
-\item{Sigma}{value of Sigma for the arm.}
+\item{Sigma}{Value of Sigma for the arm.}
 
-\item{n}{value of n for the arm.}
+\item{n}{Value of n for the arm.}
 
-\item{gamma}{numeric in (0, 1); discount factor.}
+\item{gamma}{Numeric in (0, 1); discount factor.}
 
-\item{tau}{observation precision.}
+\item{tau}{Observation precision.}
 
-\item{tol}{absolute accuracy required.}
+\item{tol}{Absolute accuracy required.}
 
 \item{ub}{Optional upper bound for the index.}
 

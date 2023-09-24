@@ -4,30 +4,32 @@
 \alias{nmab_gi_multiple}
 \title{Calculate the Gittins index for multiple arms (normal rewards)}
 \usage{
-nmab_gi_multiple(n_range, gamma, tau, tol, N, xi, delta)
+nmab_gi_multiple(n_range, gamma, tau, N, xi, delta, tol = 0.0005)
 }
 \arguments{
-\item{n_range}{numeric vector giving values of n (must be ascending).}
+\item{n_range}{Numeric vector giving values of n (must be ascending).}
 
-\item{gamma}{numeric in (0, 1); discount factor.}
+\item{gamma}{Numeric in (0, 1); discount factor.}
 
-\item{tau}{observation precision.}
+\item{tau}{Observation precision.}
 
-\item{tol}{absolute accuracy required.}
+\item{N}{Time horizon used.}
 
-\item{N}{time horizon used.}
+\item{xi}{Value of xi (entent of dynamic program state space).}
 
-\item{xi}{value of xi (entent of dynamic programmme state space).}
+\item{delta}{Value of delta (fineness of discretisation in the dynamic program).}
 
-\item{delta}{value of delta (fineness of discretisation in the dynamic programmme).}
+\item{tol}{Absolute accuracy required.}
 }
 \value{
-A vector of GI values.
+A data frame of GI vales with a row for each n in \code{n_range}. The parameters used are
+attached as an attribute \code{params}.
 }
 \description{
 Assumes mu = 0.
 }
 \examples{
-nmab_gi_multiple(1:10, gamma = 0.9, tau = 1, tol = 5e-5, N = 30, xi = 3, delta = 0.02)
-
+n1 <- nmab_gi_multiple(1:4, gamma = 0.9, tau = 1, N = 30, xi = 3, delta = 0.02, tol = 5e-4)
+n1
+attr(n1, "params")
 }

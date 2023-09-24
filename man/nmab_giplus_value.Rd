@@ -7,13 +7,13 @@
 nmab_giplus_value(lambda, mu, n, gamma)
 }
 \arguments{
-\item{lambda}{reward from the known arm}
+\item{lambda}{Reward from the known arm}
 
-\item{mu}{mean of reward belief for the unknown arm}
+\item{mu}{mMan of reward belief for the unknown arm}
 
-\item{n}{value of n for the unknown arm}
+\item{n}{Value of n for the unknown arm}
 
-\item{gamma}{numeric in (0, 1); discount factor.}
+\item{gamma}{Numeric in (0, 1); discount factor.}
 }
 \value{
 Difference in value between safe and unknown arms.
