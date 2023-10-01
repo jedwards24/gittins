@@ -19,7 +19,7 @@ NULL
 #' @name bmab_v_args
 #'
 #' @param lambda Reward from the known arm.
-#' @param Sigma Mean of reward belief for the unknown arm.
+#' @param Sigma Value of Sigma for the unknown arm.
 #' @param n Value of n for the unknown arm.
 NULL
 

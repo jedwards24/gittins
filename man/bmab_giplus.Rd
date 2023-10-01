@@ -4,7 +4,7 @@
 \alias{bmab_giplus}
 \title{Calculate the GI+ index for a single arm (Bernoulli rewards)}
 \usage{
-bmab_giplus(Sigma, n, gamma, tol = 0.0005, upper = FALSE)
+bmab_giplus(Sigma, n, gamma, tol = 5e-04, upper = FALSE)
 }
 \arguments{
 \item{Sigma}{Value of Sigma for the arm.}

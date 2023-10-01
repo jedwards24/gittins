@@ -4,10 +4,10 @@
 \alias{nmab_gi_multiple}
 \title{Calculate the Gittins index for multiple arms (normal rewards)}
 \usage{
-nmab_gi_multiple(n_range, gamma, tau, N, xi, delta, tol = 0.0005)
+nmab_gi_multiple(n_range, gamma, tau, N, xi, delta, tol = 5e-04)
 }
 \arguments{
-\item{n_range}{Numeric vector giving values of n (must be ascending).}
+\item{n_range}{Numeric vector giving values of n (all greater than 0).}
 
 \item{gamma}{Numeric in (0, 1); discount factor.}
 

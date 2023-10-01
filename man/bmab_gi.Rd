@@ -5,9 +5,9 @@
 \alias{bmab_gi_ab}
 \title{Calculate Gittins indices for a single arm (Bernoulli rewards)}
 \usage{
-bmab_gi(Sigma, n, gamma, N, tol = 0.0005, lb = NA, ub = NA)
+bmab_gi(Sigma, n, gamma, N, tol = 5e-04, lb = NA, ub = NA)
 
-bmab_gi_ab(alpha, beta, gamma, N, tol = 0.0005, lb = NA, ub = NA)
+bmab_gi_ab(alpha, beta, gamma, N, tol = 5e-04, lb = NA, ub = NA)
 }
 \arguments{
 \item{Sigma}{Value of Sigma for the arm.}

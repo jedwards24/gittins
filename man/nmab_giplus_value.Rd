@@ -9,7 +9,7 @@ nmab_giplus_value(lambda, mu, n, gamma)
 \arguments{
 \item{lambda}{Reward from the known arm}
 
-\item{mu}{mMan of reward belief for the unknown arm}
+\item{mu}{Mean of reward belief for the unknown arm}
 
 \item{n}{Value of n for the unknown arm}
 

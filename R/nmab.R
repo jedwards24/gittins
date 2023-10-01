@@ -21,7 +21,7 @@ NULL
 #' @name nmab_v_args
 #'
 #' @param lambda Reward from the known arm
-#' @param mu mMan of reward belief for the unknown arm
+#' @param mu Mean of reward belief for the unknown arm
 #' @param n Value of n for the unknown arm
 NULL
 
@@ -29,7 +29,7 @@ NULL
 #'
 #' Assumes mu = 0.
 #'
-#' @param n_range Numeric vector giving values of n (must be ascending).
+#' @param n_range Numeric vector giving values of n (all greater than 0).
 #' @inheritParams nmab_args
 #'
 #' @return A data frame of GI vales with a row for each n in `n_range`. The parameters used are
@@ -41,6 +41,13 @@ NULL
 #' attr(n1, "params")
 #' @export
 nmab_gi_multiple <- function(n_range, gamma, tau, N, xi, delta, tol = 5e-4){
+  if (!is.numeric(n_range)){
+    stop("`n_range` must be numeric.", call. = FALSE)
+  }
+  if (any(n_range <= 0)){
+    stop("All values in `n_range` must be strictly greater than zero.", call. = FALSE)
+  }
+  n_range <- sort(n_range)
   nn <- length(n_range)
   gi_vec <- numeric(nn)
   ubbl <- gamma / (1 - gamma) / sqrt(n_range[1])

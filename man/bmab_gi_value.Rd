@@ -9,7 +9,7 @@ bmab_gi_value(lambda, Sigma, n, gamma, N)
 \arguments{
 \item{lambda}{Reward from the known arm.}
 
-\item{Sigma}{Mean of reward belief for the unknown arm.}
+\item{Sigma}{Value of Sigma for the unknown arm.}
 
 \item{n}{Value of n for the unknown arm.}
 

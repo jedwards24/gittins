@@ -10,7 +10,7 @@ bmab_gi_multiple(
   num_actions,
   gamma,
   N,
-  tol = 0.0005,
+  tol = 5e-04,
   Sigma_start = NULL,
   n_start = NULL
 )

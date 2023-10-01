@@ -4,7 +4,7 @@
 \alias{nmab_gi}
 \title{Calculate the Gittins index for a single arm (normal rewards)}
 \usage{
-nmab_gi(Sigma, n, gamma, tau, N, xi, delta, tol = 0.0005, lb = NA, ub = NA)
+nmab_gi(Sigma, n, gamma, tau, N, xi, delta, tol = 5e-04, lb = NA, ub = NA)
 }
 \arguments{
 \item{Sigma}{Value of Sigma for the arm.}
