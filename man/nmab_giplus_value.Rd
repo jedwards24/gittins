@@ -11,7 +11,7 @@ nmab_giplus_value(lambda, mu, n, gamma)
 
 \item{mu}{Mean of reward belief for the unknown arm}
 
-\item{n}{Value of n for the unknown arm}
+\item{n}{Numeric > 0. Value of n for the unknown arm}
 
 \item{gamma}{Numeric in (0, 1); discount factor.}
 }

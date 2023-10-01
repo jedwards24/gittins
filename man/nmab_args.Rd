@@ -4,21 +4,21 @@
 \alias{nmab_args}
 \title{Function arguments}
 \arguments{
-\item{Sigma}{Value of Sigma for the arm.}
+\item{Sigma}{Numeric. Value of Sigma for the arm.}
 
-\item{n}{Value of n for the arm.}
+\item{n}{Numeric > 0. Value of n for the arm.}
 
 \item{gamma}{Numeric in (0, 1); discount factor.}
 
-\item{tau}{Observation precision.}
+\item{tau}{Numeric > 0. Observation precision.}
 
-\item{tol}{Absolute accuracy required.}
+\item{tol}{Numeric > 0. Absolute accuracy required.}
 
-\item{N}{Time horizon used.}
+\item{N}{Integer >= 2. Time horizon used.}
 
-\item{xi}{Value of xi (entent of dynamic program state space).}
+\item{xi}{Numeric > 0. Value of xi (entent of dynamic program state space).}
 
-\item{delta}{Value of delta (fineness of discretisation in the dynamic program).}
+\item{delta}{Numeric > 0. Value of delta (fineness of discretisation in the dynamic program).}
 }
 \description{
 Function arguments

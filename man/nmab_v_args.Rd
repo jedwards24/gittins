@@ -8,7 +8,7 @@
 
 \item{mu}{Mean of reward belief for the unknown arm}
 
-\item{n}{Value of n for the unknown arm}
+\item{n}{Numeric > 0. Value of n for the unknown arm}
 }
 \description{
 Function arguments for value functions

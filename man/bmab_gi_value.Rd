@@ -15,7 +15,7 @@ bmab_gi_value(lambda, Sigma, n, gamma, N)
 
 \item{gamma}{Numeric in (0, 1); discount factor.}
 
-\item{N}{Integer > 0; time horizon used.}
+\item{N}{Integer >= 2; time horizon used.}
 }
 \value{
 Difference in value between safe and unknown arms.

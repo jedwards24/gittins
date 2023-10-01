@@ -7,9 +7,9 @@
 bmab_kgi(Sigma, n, gamma)
 }
 \arguments{
-\item{Sigma}{Value of Sigma for the arm.}
+\item{Sigma}{Numeric > 0. Value of Sigma for the arm.}
 
-\item{n}{Value of n for the arm.}
+\item{n}{Numeric > Sigma > 0. Value of n for the arm.}
 
 \item{gamma}{Numeric in (0, 1); discount factor.}
 }

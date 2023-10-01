@@ -4,12 +4,11 @@
 #'
 #' @name bmab_args
 #'
-#' @param Sigma Value of Sigma for the arm.
-#' @param n Value of n for the arm.
+#' @param Sigma Numeric > 0. Value of Sigma for the arm.
+#' @param n Numeric > Sigma > 0. Value of n for the arm.
 #' @param gamma Numeric in (0, 1); discount factor.
-#' @param tol Absolute accuracy required.
-#' @param N Integer > 0; time horizon used.
-#'
+#' @param tol Numeric > 0. Absolute accuracy required.
+#' @param N Integer >= 2; time horizon used.
 NULL
 
 #' Function arguments for value functions
@@ -69,9 +68,15 @@ bmab_gi_multiple <- function(alpha_start = NULL, beta_start = NULL, num_actions,
          "You must supply `alpha_start` and `beta_start` OR `Sigma_start` and `n_start`.", call. = FALSE)
   }
   if (!is.null(Sigma_start)){
+    if (Sigma_start >= n_start){
+      stop("`n_start` must be greater than `Sigma_start`.", call. = FALSE)
+    }
     alpha_start <- Sigma_start
     beta_start <- n_start - Sigma_start
   }
+  check_numeric(alpha_start, "alpha_start", 0)
+  check_numeric(beta_start, "beta_start", 0)
+  check_integerish(num_actions, "num_actions", 2L)
 
   n_states <- as.integer(round(0.5 * num_actions * (num_actions + 1), 0))
   alpha_vec <- beta_vec <- integer(n_states)
@@ -93,7 +98,7 @@ bmab_gi_multiple <- function(alpha_start = NULL, beta_start = NULL, num_actions,
     index <- end_index + 1
     ub <- 1
     for (b in seq_along(betas)){
-      gi_mat[b, a] <- bmab_gi_ab(alpha_range[a], beta_range[b], gamma, tol, N, lb = lb_vec[b], ub = ub)
+      gi_mat[b, a] <- bmab_gi_ab(alpha_range[a], beta_range[b], gamma, N, tol, lb = lb_vec[b], ub = ub)
       ub <- gi_mat[b, a]
     }
     lb_vec <- gi_mat[, a]
@@ -114,17 +119,6 @@ bmab_gi_multiple <- function(alpha_start = NULL, beta_start = NULL, num_actions,
   attr(df, "gi_matrix") <- gi_mat
   attr(df, "gi_matrix_ns") <- gi_mat_ns
   df
-}
-
-#' Check if the correct starting state arguments have values
-#'
-#' Helper for `bmab_gi_multiple()`. Returns `TRUE` if arguments are okay, `FALSE` otherwise.
-#' @noRd
-check_start_args <- function(alpha_start = NULL, beta_start = NULL, Sigma_start = NULL, n_start = NULL) {
-  if (is.null(alpha_start) + is.null(beta_start) == 1) return(FALSE)
-  if (is.null(Sigma_start) + is.null(n_start) == 1) return(FALSE)
-  return(xor(!is.null(alpha_start) && !is.null(beta_start),
-             !is.null(Sigma_start) && !is.null(n_start)))
 }
 
 #' Calculate Gittins indices for a single arm (Bernoulli rewards)
@@ -150,11 +144,21 @@ bmab_gi <- function(Sigma, n, gamma, N, tol = 5e-4, lb = NA, ub = NA){
   if (is.na(ub)){
     ub <- bmab_giplus(Sigma, n, gamma, tol, upper = TRUE)
   }
+  check_numeric(Sigma, "Sigma", 0)
+  check_numeric(n, "n", 0)
+  if (Sigma >= n){
+    stop("`n` must be greater than `Sigma`.", call. = FALSE)
+  }
+  check_numeric(gamma, "gamma", 0, 1)
+  check_integerish(N, "N", 2L)
+  check_numeric(tol, "tol", 0)
+  check_numeric(lb, "lb")
+  check_numeric(ub, "ub")
   mean(calibrate_arm(bmab_gi_value, lb, ub, tol, Sigma, n, gamma, N))
 }
 
-#' @param alpha Value of alpha for the arm.
-#' @param beta Value of beta for the arm.
+#' @param alpha Numeric > 0.Value of alpha for the arm.
+#' @param beta Numeric > 0. Value of beta for the arm.
 #'
 #' @rdname bmab_gi
 #' @export

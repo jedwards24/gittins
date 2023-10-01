@@ -15,3 +15,10 @@ test_that("bmab_giplus gives expected output", {
   expect_gte(x4, x3)
   expect_equal(x3, 0.7168457)
 })
+
+test_that("bmab_gi() arg checks work", {
+  expect_error(bmab_gi(3, 5, gamma = 0.8, N = 1),"`N` must be at least 2")
+  expect_error(bmab_gi(3, 5, gamma = 0.8, N = 9.5),"`N` must be a whole number")
+  expect_error(bmab_gi(3, 5, gamma = 0, N = 1),"`gamma` must be greater than 0")
+  expect_error(bmab_gi(Sigma = 1, n = 1, gamma = 0.5, N = 20), "`n` must be greater than `Sigma`")
+})

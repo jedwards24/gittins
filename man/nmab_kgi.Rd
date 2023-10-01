@@ -7,15 +7,15 @@
 nmab_kgi(Sigma, n, gamma, tau, tol = 5e-04, ub = NA, lower = FALSE)
 }
 \arguments{
-\item{Sigma}{Value of Sigma for the arm.}
+\item{Sigma}{Numeric. Value of Sigma for the arm.}
 
-\item{n}{Value of n for the arm.}
+\item{n}{Numeric > 0. Value of n for the arm.}
 
 \item{gamma}{Numeric in (0, 1); discount factor.}
 
-\item{tau}{Observation precision.}
+\item{tau}{Numeric > 0. Observation precision.}
 
-\item{tol}{Absolute accuracy required.}
+\item{tol}{Numeric > 0. Absolute accuracy required.}
 
 \item{ub}{Optional upper bound for the index.}
 

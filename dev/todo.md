@@ -1,6 +1,7 @@
 # Project TODO
 
-Add checks on parameter values: e.g. num_actions >= 2
+bmab_gi --> bmab_ns? (swap args)
+Make some funcs internal?
 
 Add to README/docs
 - Rewrite README

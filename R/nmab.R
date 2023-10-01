@@ -4,14 +4,14 @@
 #'
 #' @name nmab_args
 #'
-#' @param Sigma Value of Sigma for the arm.
-#' @param n Value of n for the arm.
+#' @param Sigma Numeric. Value of Sigma for the arm.
+#' @param n Numeric > 0. Value of n for the arm.
 #' @param gamma Numeric in (0, 1); discount factor.
-#' @param tau Observation precision.
-#' @param tol Absolute accuracy required.
-#' @param N Time horizon used.
-#' @param xi Value of xi (entent of dynamic program state space).
-#' @param delta Value of delta (fineness of discretisation in the dynamic program).
+#' @param tau Numeric > 0. Observation precision.
+#' @param tol Numeric > 0. Absolute accuracy required.
+#' @param N Integer >= 2. Time horizon used.
+#' @param xi Numeric > 0. Value of xi (entent of dynamic program state space).
+#' @param delta Numeric > 0. Value of delta (fineness of discretisation in the dynamic program).
 NULL
 
 #' Function arguments for value functions
@@ -22,7 +22,7 @@ NULL
 #'
 #' @param lambda Reward from the known arm
 #' @param mu Mean of reward belief for the unknown arm
-#' @param n Value of n for the unknown arm
+#' @param n Numeric > 0. Value of n for the unknown arm
 NULL
 
 #' Calculate the Gittins index for multiple arms (normal rewards)
@@ -47,6 +47,8 @@ nmab_gi_multiple <- function(n_range, gamma, tau, N, xi, delta, tol = 5e-4){
   if (any(n_range <= 0)){
     stop("All values in `n_range` must be strictly greater than zero.", call. = FALSE)
   }
+  check_numeric(gamma, "gamma", 0, 1)
+
   n_range <- sort(n_range)
   nn <- length(n_range)
   gi_vec <- numeric(nn)
@@ -86,6 +88,17 @@ nmab_gi <- function(Sigma, n, gamma, tau, N, xi, delta, tol = 5e-4, lb = NA, ub 
   if (is.na(ub)){
     ub <- nmab_giplus(0, n, gamma, tol, ub, upper = TRUE)
   }
+  check_numeric(Sigma, "Sigma")
+  check_numeric(n, "n", 0)
+  check_numeric(gamma, "gamma", 0, 1)
+  check_numeric(tau, "tau", 0)
+  check_integerish(N, "N", 2L)
+  check_numeric(xi, "xi", 0)
+  check_numeric(delta, "delta", 0)
+  check_numeric(tol, "tol", 0)
+  check_numeric(lb, "lb")
+  check_numeric(ub, "ub")
+
   interval <- Sigma / n + calibrate_arm(nmab_gi_value, lb, ub, tol, n, gamma, tau, N, xi, delta)
   mean(interval)
 }

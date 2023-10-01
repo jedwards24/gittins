@@ -12,6 +12,7 @@ Breaking changes:
 
 Other changes:
 
+* Add checks that parameters take appropriate values. 
 * The `tol` argument now has a default value (5e-4).
 * Code tidying and style changes.
 * Documentation edits. 

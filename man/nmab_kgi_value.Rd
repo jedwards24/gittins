@@ -11,11 +11,11 @@ nmab_kgi_value(lambda, mu, n, gamma, tau)
 
 \item{mu}{Mean of reward belief for the unknown arm}
 
-\item{n}{Value of n for the unknown arm}
+\item{n}{Numeric > 0. Value of n for the unknown arm}
 
 \item{gamma}{Numeric in (0, 1); discount factor.}
 
-\item{tau}{Observation precision.}
+\item{tau}{Numeric > 0. Observation precision.}
 }
 \value{
 Difference in value between safe and unknown arms.

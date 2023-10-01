@@ -10,23 +10,23 @@ bmab_gi(Sigma, n, gamma, N, tol = 5e-04, lb = NA, ub = NA)
 bmab_gi_ab(alpha, beta, gamma, N, tol = 5e-04, lb = NA, ub = NA)
 }
 \arguments{
-\item{Sigma}{Value of Sigma for the arm.}
+\item{Sigma}{Numeric > 0. Value of Sigma for the arm.}
 
-\item{n}{Value of n for the arm.}
+\item{n}{Numeric > Sigma > 0. Value of n for the arm.}
 
 \item{gamma}{Numeric in (0, 1); discount factor.}
 
-\item{N}{Integer > 0; time horizon used.}
+\item{N}{Integer >= 2; time horizon used.}
 
-\item{tol}{Absolute accuracy required.}
+\item{tol}{Numeric > 0. Absolute accuracy required.}
 
 \item{lb}{Optional lower bound for GI.}
 
 \item{ub}{Optional upper bound for GI.}
 
-\item{alpha}{Value of alpha for the arm.}
+\item{alpha}{Numeric > 0.Value of alpha for the arm.}
 
-\item{beta}{Value of beta for the arm.}
+\item{beta}{Numeric > 0. Value of beta for the arm.}
 }
 \value{
 A single Gittins index

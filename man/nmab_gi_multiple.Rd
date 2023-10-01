@@ -11,15 +11,15 @@ nmab_gi_multiple(n_range, gamma, tau, N, xi, delta, tol = 5e-04)
 
 \item{gamma}{Numeric in (0, 1); discount factor.}
 
-\item{tau}{Observation precision.}
+\item{tau}{Numeric > 0. Observation precision.}
 
-\item{N}{Time horizon used.}
+\item{N}{Integer >= 2. Time horizon used.}
 
-\item{xi}{Value of xi (entent of dynamic program state space).}
+\item{xi}{Numeric > 0. Value of xi (entent of dynamic program state space).}
 
-\item{delta}{Value of delta (fineness of discretisation in the dynamic program).}
+\item{delta}{Numeric > 0. Value of delta (fineness of discretisation in the dynamic program).}
 
-\item{tol}{Absolute accuracy required.}
+\item{tol}{Numeric > 0. Absolute accuracy required.}
 }
 \value{
 A data frame of GI vales with a row for each n in \code{n_range}. The parameters used are

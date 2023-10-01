@@ -24,9 +24,9 @@ bmab_gi_multiple(
 
 \item{gamma}{Numeric in (0, 1); discount factor.}
 
-\item{N}{Integer > 0; time horizon used.}
+\item{N}{Integer >= 2; time horizon used.}
 
-\item{tol}{Absolute accuracy required.}
+\item{tol}{Numeric > 0. Absolute accuracy required.}
 
 \item{Sigma_start}{Lowest value of Sigma for the arms.}
 
