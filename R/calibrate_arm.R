@@ -8,6 +8,7 @@
 #' @param tol Absolute accuracy required.
 #' @param ... Other arguments passed to `FUN`.
 #'
+#' @keywords internal
 #' @return A vector of lower and upper end of an interval containing the true value.
 #' @export
 calibrate_arm <- function(FUN, lb, ub, tol, ...){

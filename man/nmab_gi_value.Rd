@@ -2,7 +2,7 @@
 % Please edit documentation in R/nmab.R
 \name{nmab_gi_value}
 \alias{nmab_gi_value}
-\title{Value calculation for the one-armed bandit with Normal rewards.}
+\title{Value calculation for the one-armed bandit with Normal rewards}
 \usage{
 nmab_gi_value(lambda, n, gamma, tau, N, xi, delta, extra_xi = 1)
 }
@@ -11,7 +11,7 @@ nmab_gi_value(lambda, n, gamma, tau, N, xi, delta, extra_xi = 1)
 
 \item{n}{Numeric > 0. Value of n for the unknown arm}
 
-\item{gamma}{Numeric in (0, 1); discount factor.}
+\item{gamma}{Numeric in (0, 1). Reward discount factor.}
 
 \item{tau}{Numeric > 0. Observation precision.}
 
@@ -42,3 +42,4 @@ within xi standard deviations and are calculated in detail using dynamic program
 new states within xi + extra_xi standard deviations. I have found \code{extra_xi = 1} works well and
 have set this as the default. This is value that should be used unless doing research on its effect.
 }
+\keyword{internal}

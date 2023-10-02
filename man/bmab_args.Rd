@@ -8,11 +8,11 @@
 
 \item{n}{Numeric > Sigma > 0. Value of n for the arm.}
 
-\item{gamma}{Numeric in (0, 1); discount factor.}
+\item{gamma}{Numeric in (0, 1). Reward discount factor.}
+
+\item{N}{Integer >= 2. Time horizon used in the calculation..}
 
 \item{tol}{Numeric > 0. Absolute accuracy required.}
-
-\item{N}{Integer >= 2; time horizon used.}
 }
 \description{
 Function arguments

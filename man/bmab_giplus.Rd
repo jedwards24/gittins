@@ -11,7 +11,7 @@ bmab_giplus(Sigma, n, gamma, tol = 5e-04, upper = FALSE)
 
 \item{n}{Numeric > Sigma > 0. Value of n for the arm.}
 
-\item{gamma}{Numeric in (0, 1); discount factor.}
+\item{gamma}{Numeric in (0, 1). Reward discount factor.}
 
 \item{tol}{Numeric > 0. Absolute accuracy required.}
 

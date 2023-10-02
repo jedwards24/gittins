@@ -11,7 +11,7 @@ bmab_kgi(Sigma, n, gamma)
 
 \item{n}{Numeric > Sigma > 0. Value of n for the arm.}
 
-\item{gamma}{Numeric in (0, 1); discount factor.}
+\item{gamma}{Numeric in (0, 1). Reward discount factor.}
 }
 \value{
 An index value or a vector of values.
@@ -20,6 +20,6 @@ An index value or a vector of values.
 The KGI is an lower bound for the Gittins index.
 }
 \details{
-This is an exact closed form calculation and arguments \code{Sigma} and \code{n} can be supplied as vectors in
+This is an exact closed form calculation. Arguments \code{Sigma} and \code{n} can be supplied as vectors in
 which case a vector of index values will be returned.
 }

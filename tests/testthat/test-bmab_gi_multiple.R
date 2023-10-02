@@ -18,4 +18,5 @@ test_that("bmab_gi_multiple() gives correct output", {
   expect_identical(b1, b2)
   expect_s3_class(b1, "data.frame")
   expect_true(all(c("params", "gi_matrix", "gi_matrix_ns") %in% names(attributes(b1))))
+  expect_snapshot_value(b1, style = "json2")
 })

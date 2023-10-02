@@ -2,14 +2,14 @@
 % Please edit documentation in R/nmab.R
 \name{nmab_gi_multiple}
 \alias{nmab_gi_multiple}
-\title{Calculate the Gittins index for multiple arms (normal rewards)}
+\title{Calculate Gittins indices for multiple arms (normal rewards)}
 \usage{
 nmab_gi_multiple(n_range, gamma, tau, N, xi, delta, tol = 5e-04)
 }
 \arguments{
 \item{n_range}{Numeric vector giving values of n (all greater than 0).}
 
-\item{gamma}{Numeric in (0, 1); discount factor.}
+\item{gamma}{Numeric in (0, 1). Reward discount factor.}
 
 \item{tau}{Numeric > 0. Observation precision.}
 
@@ -26,7 +26,8 @@ A data frame of GI vales with a row for each n in \code{n_range}. The parameters
 attached as an attribute \code{params}.
 }
 \description{
-Assumes mu = 0.
+This assumes mu = 0 as the GI for other values can then be derived by simple addition. See
+\code{?nmab_gi} for more detail on the problem and computation parameters.
 }
 \examples{
 n1 <- nmab_gi_multiple(1:4, gamma = 0.9, tau = 1, N = 30, xi = 3, delta = 0.02, tol = 5e-4)

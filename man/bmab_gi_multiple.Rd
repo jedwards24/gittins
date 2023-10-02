@@ -22,9 +22,9 @@ bmab_gi_multiple(
 
 \item{num_actions}{Determines the number of states GI are calculated for.}
 
-\item{gamma}{Numeric in (0, 1); discount factor.}
+\item{gamma}{Numeric in (0, 1). Reward discount factor.}
 
-\item{N}{Integer >= 2; time horizon used.}
+\item{N}{Integer >= 2. Time horizon used in the calculation..}
 
 \item{tol}{Numeric > 0. Absolute accuracy required.}
 
@@ -43,8 +43,8 @@ A data frame of starting states and GI values. Extra information is stored in at
 }
 \description{
 Runs \code{bmab_gi()} multiple times for a range of arm starting states. The starting states used are
-determined by the starting state arguments  and \code{num_actions} (see details). Other arguments are
-passed to \code{bmab_gi()}.
+determined by the starting state arguments and \code{num_actions} (see details). Other arguments are
+passed to \code{bmab_gi()}. See \code{?bmab_gi} for argument and calculation details.
 }
 \details{
 The starting states are either given in alpha/beta or Sigma/n form (strictly one or the other).

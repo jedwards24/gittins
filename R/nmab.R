@@ -1,12 +1,11 @@
 #' Function arguments
 #'
 #' @keywords internal
-#'
 #' @name nmab_args
 #'
-#' @param Sigma Numeric. Value of Sigma for the arm.
-#' @param n Numeric > 0. Value of n for the arm.
-#' @param gamma Numeric in (0, 1); discount factor.
+#' @param Sigma Numeric. Value of Sigma for the arm (Bayesian reward).
+#' @param n Numeric > 0. Value of n for the arm (Bayesian number of observation).
+#' @param gamma Numeric in (0, 1). Reward discount factor.
 #' @param tau Numeric > 0. Observation precision.
 #' @param tol Numeric > 0. Absolute accuracy required.
 #' @param N Integer >= 2. Time horizon used.
@@ -17,7 +16,6 @@ NULL
 #' Function arguments for value functions
 #'
 #' @keywords internal
-#'
 #' @name nmab_v_args
 #'
 #' @param lambda Reward from the known arm
@@ -25,9 +23,10 @@ NULL
 #' @param n Numeric > 0. Value of n for the unknown arm
 NULL
 
-#' Calculate the Gittins index for multiple arms (normal rewards)
+#' Calculate Gittins indices for multiple arms (normal rewards)
 #'
-#' Assumes mu = 0.
+#' This assumes mu = 0 as the GI for other values can then be derived by simple addition. See
+#' `?nmab_gi` for more detail on the problem and computation parameters.
 #'
 #' @param n_range Numeric vector giving values of n (all greater than 0).
 #' @inheritParams nmab_args
@@ -70,14 +69,36 @@ nmab_gi_multiple <- function(n_range, gamma, tau, N, xi, delta, tol = 5e-4){
 
 #' Calculate the Gittins index for a single arm (normal rewards)
 #'
-#' The initial interval for calibration are as follows:
+#' The problem state is given by the `Sigma`, `n`, `gamma`, and `tau` arguments. The
+#' remaining arguments affect how the calculation is done and are chosen based on accuracy
+#' and speed requirements (see details).
+#'
+#' @details
+#' The problem has an infinite continuous state space, but the calculation can only be done for a
+#' finite discrete area. `N` and `xi` control the finite extent of the state space used (one in
+#' each direction). These have a diminishing effect on accuracy and just need to be sufficiently
+#' large, beyond which there will be minimal improvement. Each parameter has a linear effect on the state
+#' space size and therefore algorithm speed. Larger `gamma` or smaller `tau` requires
+#' a larger `N`, but depends only on the least favourable of the two. Often `N` can be smaller
+#' than for similar BMAB problems. The required `xi` is more robust to changes in the problem setting
+#' as adjusts to `tau` somewhat. Therefore, standard values can be used across problems with less
+#' disadvantage. `xi` is based on standard deviations so 3 or 4 will often be large enough. Using `N` or
+#' `xi` values that are too low gives an underestimate of the Gittins index.
+#'
+#' The discretisation parameter `delta` is the main limiter to accuracy as it has a non-linear
+#' effect on computation time. Accuracy increases as `delta` gets smaller, with inaccuracies leading
+#' to an overestimate of the Gittins index.
+#'
+#' The `lb` and `ub` arguments can be used to provide a starting interval for calibration if desired.
+#' However, for normal use this is not needed as they will be calculated internally if not supplied.
+#' So the initial interval is determined as follows:
 #' * For lower bound, use `lb` if supplied else use KGI.
 #' * For upper bound, use `ub` if supplied else use GI+.
 #'
 #' @inheritParams nmab_args
 #' @param lb Optional lower bound for GI.
 #' @param ub Optional upper bound for GI.
-#'
+#' @seealso For a link to the accompanying paper see [gittins-package].
 #' @return A vector of GI values.
 #'
 #' @export
@@ -145,6 +166,7 @@ nmab_kgi <- function(Sigma, n, gamma, tau, tol = 5e-4, ub = NA, lower = FALSE){
 #'
 #' @inheritParams nmab_v_args
 #' @inheritParams nmab_args
+#' @keywords internal
 #'
 #' @return Difference in value between safe and unknown arms.
 #' @export
@@ -160,6 +182,7 @@ nmab_giplus_value <- function(lambda, mu, n, gamma){
 #'
 #' @inheritParams nmab_v_args
 #' @inheritParams nmab_args
+#' @keywords internal
 #'
 #' @return Difference in value between safe and unknown arms.
 #' @export
@@ -183,7 +206,7 @@ nmab_risky_reward <- function(mu, y_lo_scaled, y_hi_scaled, tn_scaled, tau, s, v
                      sum(p * value_vec))
 }
 
-#' Value calculation for the one-armed bandit with Normal rewards.
+#' Value calculation for the one-armed bandit with Normal rewards
 #'
 #' Assumes `Sigma = mu = 0`.
 #'
@@ -202,6 +225,7 @@ nmab_risky_reward <- function(mu, y_lo_scaled, y_hi_scaled, tn_scaled, tau, s, v
 #' @inheritParams nmab_v_args
 #' @inheritParams nmab_args
 #' @param extra_xi Extend xi using a fast approximation. See details
+#' @keywords internal
 #'
 #' @return Difference in value between safe and unknown arms.
 #' @export

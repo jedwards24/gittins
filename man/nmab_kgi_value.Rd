@@ -13,7 +13,7 @@ nmab_kgi_value(lambda, mu, n, gamma, tau)
 
 \item{n}{Numeric > 0. Value of n for the unknown arm}
 
-\item{gamma}{Numeric in (0, 1); discount factor.}
+\item{gamma}{Numeric in (0, 1). Reward discount factor.}
 
 \item{tau}{Numeric > 0. Observation precision.}
 }
@@ -24,3 +24,4 @@ Difference in value between safe and unknown arms.
 Calculation is as given in Ryzhov, Powell & Frazier (2012), simplified since \code{lambda >= mu}
 always when called here.
 }
+\keyword{internal}

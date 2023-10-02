@@ -1,20 +1,18 @@
 #' Function arguments
 #'
 #' @keywords internal
-#'
 #' @name bmab_args
 #'
 #' @param Sigma Numeric > 0. Value of Sigma for the arm.
 #' @param n Numeric > Sigma > 0. Value of n for the arm.
-#' @param gamma Numeric in (0, 1); discount factor.
+#' @param gamma Numeric in (0, 1). Reward discount factor.
+#' @param N Integer >= 2. Time horizon used in the calculation..
 #' @param tol Numeric > 0. Absolute accuracy required.
-#' @param N Integer >= 2; time horizon used.
 NULL
 
 #' Function arguments for value functions
 #'
 #' @keywords internal
-#'
 #' @name bmab_v_args
 #'
 #' @param lambda Reward from the known arm.
@@ -25,8 +23,8 @@ NULL
 #' Calculate Gittins indices for multiple starting states (Bernoulli rewards)
 #'
 #' Runs `bmab_gi()` multiple times for a range of arm starting states. The starting states used are
-#' determined by the starting state arguments  and `num_actions` (see details). Other arguments are
-#' passed to `bmab_gi()`.
+#' determined by the starting state arguments and `num_actions` (see details). Other arguments are
+#' passed to `bmab_gi()`. See `?bmab_gi` for argument and calculation details.
 #'
 #' @details
 #' The starting states are either given in alpha/beta or Sigma/n form (strictly one or the other).
@@ -121,19 +119,33 @@ bmab_gi_multiple <- function(alpha_start = NULL, beta_start = NULL, num_actions,
   df
 }
 
-#' Calculate Gittins indices for a single arm (Bernoulli rewards)
+#' Calculate the Gittins index for a single arm (Bernoulli rewards)
 #'
-#' There are two versions which differ only in their parameterisation and in the layout of the output.
-#' `bmab_gi()` uses `Sigma` and `n` parameters, while `bmab_gi_ab()` uses `alpha = Sigma`
-#' and  `beta = n - Sigma`.
+#' @description
+#' The two versions of this function differ only in their state parameters:
+#' * `bmab_gi()` uses `Sigma` and `n` parameters.
+#' * `bmab_gi_ab()` uses `alpha` and `beta` parameters
 #'
-#' The initial interval for calibration are as follows:
-#' For lower bound, use lb if supplied else use KGI.
-#' For upper bound, use ub if supplied else use GI+.
+#' These are related by  `alpha = Sigma` (Bayesian number of successes) and  `beta = n - Sigma`
+#' (Bayesian number of failures). Then `n` is the Bayesian number of observations. Together
+#' with `gamma` (the discount factor for rewards), these define the problem. The remaining arguments
+#' are settings for the calculation only (see details).
+#'
+#' @details
+#' The problem has an infinite time horizon, but the dynamic program used to calculate the GI has a finite
+#' horizon `N`. For sufficiently large `N`, the calculation can be arbitrarily accurate. In practice,
+#' a fairly low value of `N` works well unless `gamma` is close to 1.
+#'
+#' The `lb` and `ub` arguments can be used to provide a starting interval for calibration if desired.
+#' However, for normal use this is not needed as they will be calculated internally if not supplied.
+#' So the initial interval is determined as follows:
+#' * For lower bound, use `lb` if supplied else use KGI.
+#' * For upper bound, use `ub` if supplied else use GI+.
 #'
 #' @inheritParams bmab_args
 #' @param lb Optional lower bound for GI.
 #' @param ub Optional upper bound for GI.
+#' @seealso For a link to the accompanying paper see [gittins-package].
 #'
 #' @return A single Gittins index
 #' @export
@@ -187,7 +199,7 @@ bmab_giplus <- function(Sigma, n, gamma, tol = 5e-4, upper = FALSE){
 #'
 #' The KGI is an lower bound for the Gittins index.
 #'
-#' This is an exact closed form calculation and arguments `Sigma` and `n` can be supplied as vectors in
+#' This is an exact closed form calculation. Arguments `Sigma` and `n` can be supplied as vectors in
 #' which case a vector of index values will be returned.
 #'
 #' @inheritParams bmab_args
@@ -204,7 +216,7 @@ bmab_kgi <- function(Sigma, n, gamma){
 #'
 #' @inheritParams bmab_v_args
 #' @inheritParams bmab_args
-#'
+#' @keywords internal
 #' @return Difference in value between safe and unknown arms.
 #' @export
 bmab_giplus_value <- function(lambda, Sigma, n, gamma){
@@ -227,6 +239,7 @@ continue <- function(x, Sigma, n){
 #' @inheritParams bmab_v_args
 #' @inheritParams bmab_args
 #'
+#' @keywords internal
 #' @return Difference in value between safe and unknown arms.
 #' @export
 bmab_gi_value <- function(lambda, Sigma, n, gamma, N){

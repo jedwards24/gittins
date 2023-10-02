@@ -3,7 +3,7 @@
 \name{bmab_gi}
 \alias{bmab_gi}
 \alias{bmab_gi_ab}
-\title{Calculate Gittins indices for a single arm (Bernoulli rewards)}
+\title{Calculate the Gittins index for a single arm (Bernoulli rewards)}
 \usage{
 bmab_gi(Sigma, n, gamma, N, tol = 5e-04, lb = NA, ub = NA)
 
@@ -14,9 +14,9 @@ bmab_gi_ab(alpha, beta, gamma, N, tol = 5e-04, lb = NA, ub = NA)
 
 \item{n}{Numeric > Sigma > 0. Value of n for the arm.}
 
-\item{gamma}{Numeric in (0, 1); discount factor.}
+\item{gamma}{Numeric in (0, 1). Reward discount factor.}
 
-\item{N}{Integer >= 2; time horizon used.}
+\item{N}{Integer >= 2. Time horizon used in the calculation..}
 
 \item{tol}{Numeric > 0. Absolute accuracy required.}
 
@@ -32,12 +32,30 @@ bmab_gi_ab(alpha, beta, gamma, N, tol = 5e-04, lb = NA, ub = NA)
 A single Gittins index
 }
 \description{
-There are two versions which differ only in their parameterisation and in the layout of the output.
-\code{bmab_gi()} uses \code{Sigma} and \code{n} parameters, while \code{bmab_gi_ab()} uses \code{alpha = Sigma}
-and  \code{beta = n - Sigma}.
+The two versions of this function differ only in their state parameters:
+\itemize{
+\item \code{bmab_gi()} uses \code{Sigma} and \code{n} parameters.
+\item \code{bmab_gi_ab()} uses \code{alpha} and \code{beta} parameters
+}
+
+These are related by  \code{alpha = Sigma} (Bayesian number of successes) and  \code{beta = n - Sigma}
+(Bayesian number of failures). Then \code{n} is the Bayesian number of observations. Together
+with \code{gamma} (the discount factor for rewards), these define the problem. The remaining arguments
+are settings for the calculation only (see details).
 }
 \details{
-The initial interval for calibration are as follows:
-For lower bound, use lb if supplied else use KGI.
-For upper bound, use ub if supplied else use GI+.
+The problem has an infinite time horizon, but the dynamic program used to calculate the GI has a finite
+horizon \code{N}. For sufficiently large \code{N}, the calculation can be arbitrarily accurate. In practice,
+a fairly low value of \code{N} works well unless \code{gamma} is close to 1.
+
+The \code{lb} and \code{ub} arguments can be used to provide a starting interval for calibration if desired.
+However, for normal use this is not needed as they will be calculated internally if not supplied.
+So the initial interval is determined as follows:
+\itemize{
+\item For lower bound, use \code{lb} if supplied else use KGI.
+\item For upper bound, use \code{ub} if supplied else use GI+.
+}
+}
+\seealso{
+For a link to the accompanying paper see \link{gittins-package}.
 }

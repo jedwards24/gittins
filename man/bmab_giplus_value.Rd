@@ -13,7 +13,7 @@ bmab_giplus_value(lambda, Sigma, n, gamma)
 
 \item{n}{Value of n for the unknown arm.}
 
-\item{gamma}{Numeric in (0, 1); discount factor.}
+\item{gamma}{Numeric in (0, 1). Reward discount factor.}
 }
 \value{
 Difference in value between safe and unknown arms.
@@ -21,3 +21,4 @@ Difference in value between safe and unknown arms.
 \description{
 Value of one-armed bandit using GI+ (Bernoulli rewards)
 }
+\keyword{internal}

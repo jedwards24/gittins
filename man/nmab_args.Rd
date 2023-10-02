@@ -4,11 +4,11 @@
 \alias{nmab_args}
 \title{Function arguments}
 \arguments{
-\item{Sigma}{Numeric. Value of Sigma for the arm.}
+\item{Sigma}{Numeric. Value of Sigma for the arm (Bayesian reward).}
 
-\item{n}{Numeric > 0. Value of n for the arm.}
+\item{n}{Numeric > 0. Value of n for the arm (Bayesian number of observation).}
 
-\item{gamma}{Numeric in (0, 1); discount factor.}
+\item{gamma}{Numeric in (0, 1). Reward discount factor.}
 
 \item{tau}{Numeric > 0. Observation precision.}
 

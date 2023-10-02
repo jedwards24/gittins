@@ -23,3 +23,4 @@ A vector of lower and upper end of an interval containing the true value.
 \description{
 Performs iterative reduction of an interval using calibration with value function FUN.
 }
+\keyword{internal}
