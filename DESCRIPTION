@@ -1,7 +1,7 @@
 Package: gittins
 Type: Package
 Title: Calculate Gittins Indices
-Version: 0.1.0.9004
+Version: 0.2.0
 Author: James Edwards <jamese1326+gh@gmail.com> 
 Maintainer: James Edwards <jamese1326+gh@gmail.com>
 Description: Calculates Gittins indices for the multi-armed bandit problem.

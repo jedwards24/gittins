@@ -1,4 +1,4 @@
-# gittins (development version)
+# gittins 0.2.0
 
 Breaking changes:
 
@@ -17,6 +17,10 @@ Other changes:
 * Code tidying and style changes.
 * Documentation edits. 
 * Add GPL3 licence.
+* Added `@keywords internal` to value functions and `calibrate_arm()` since they will not normally 
+be used directly (they are still exported).
+* Add package help file with useful links (see `?gittins`).
+* Rewrite README.
 
 # gittins 0.1.0
 
